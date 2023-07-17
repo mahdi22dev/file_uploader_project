@@ -16,13 +16,9 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 a {
@@ -32,5 +28,6 @@ a {
 
 button {
   cursor: pointer;
-  max-width: 200px;
+  max-width: 150px;
+  margin: 0 auto;
 }

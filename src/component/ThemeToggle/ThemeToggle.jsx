@@ -9,7 +9,7 @@ const ThemeToggle = () => {
       // style={{ width: "200px", backgroundColor: "red" }}
       onClick={toogleMode}
     >
-      toggle dark mode
+      change theme
     </button>
   );
 };
