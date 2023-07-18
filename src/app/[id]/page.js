@@ -1,13 +1,14 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { db } from "@/lib/utils/firebase";
+import { db } from "@/lib/firebase";
 import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
 let files = [];
+
 const getdata = async () => {
   const fileref = collection(db, `/files/`);
   onSnapshot(fileref, (snapshot) => {
     files = snapshot.docs.map((doc) => {
-      return { ...doc.data(), id: doc.id };
+      return { id: doc.id };
     });
   });
 };
@@ -15,9 +16,7 @@ const getdata = async () => {
 export async function generateStaticParams() {
   await getdata();
 
-  return files?.map((file) => ({
-    id: file.id,
-  }));
+  return files;
 }
 
 export default async function Page({ params }) {

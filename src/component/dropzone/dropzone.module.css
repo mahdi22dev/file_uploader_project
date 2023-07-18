@@ -1,0 +1,180 @@
+.values {
+  --color-primary-a10: #fff5cc;
+  --color-primary-a20: #ffeb99;
+  --color-primary-a30: #ffe162;
+  --color-primary-a50: #ffd803;
+  --color-primary-a60: #b99d17;
+  --color-primary-a70: #786619;
+  --color-primary-a80: #3d3413;
+  --color-primary-a90: #000000;
+}
+.dropzone {
+  border: 10px solid var(--color-primary-a10);
+  margin-top: 50px;
+  max-width: 1200px;
+  width: min(80vw, 700px);
+  padding: 50px;
+  min-height: 200px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: var(--color-primary-a10);
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--color-primary-a70);
+}
+
+.light {
+  border: 10px solid var(--color-primary-a10);
+  margin-top: 50px;
+  max-width: 1200px;
+  width: min(80vw, 700px);
+  padding: 50px;
+  min-height: 200px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--color-primary-a60);
+}
+
+/* loader */
+.loader {
+  /* color of choise */
+  --clr: #05a8aa;
+  /* loading time of choice */
+  --load-time: 2s;
+  outline: 5px solid var(--color-primary-a10);
+  outline-offset: 5px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5rem;
+  /* width: 10rem; */
+  /* height: 2rem; */
+  padding: 1rem 5rem;
+  /* use either padding or width + height*/
+  /* I prefer the padding one */
+  /* rotate: -90deg; */
+  /* rotate if you want/need vertical loader */
+}
+.loadertext {
+  margin-top: 20px;
+  color: var(--color-primary-a10);
+}
+.loader::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary-a50);
+  z-index: 2;
+  animation: loading var(--load-time) ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+/* animation */
+.animation {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.inputdiv {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary-a10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 0px 100px #fff5cc, inset 0px 0px 10px #fff5cc,
+    0px 0px 5px rgb(255, 255, 255);
+  animation: flicker 2s linear infinite;
+}
+
+.icon {
+  color: var(--color-primary-a10);
+  font-size: 2rem;
+  cursor: pointer;
+  animation: iconflicker 2s linear infinite;
+}
+
+@keyframes flicker {
+  0% {
+    border: 2px solid #fff5cc;
+    box-shadow: 0px 0px 100px #fff5cc, inset 0px 0px 10px #fff5cc,
+      0px 0px 5px rgb(255, 255, 255);
+  }
+
+  5% {
+    border: none;
+    box-shadow: none;
+  }
+
+  10% {
+    border: 2px solid #fff5cc;
+    box-shadow: 0px 0px 100px #fff5cc, inset 0px 0px 10px #fff5cc,
+      0px 0px 5px rgb(255, 255, 255);
+  }
+
+  25% {
+    border: none;
+    box-shadow: none;
+  }
+
+  30% {
+    border: 2px solid #fff5cc;
+    box-shadow: 0px 0px 100px #fff5cc, inset 0px 0px 10px #fff5cc,
+      0px 0px 5px rgb(255, 255, 255);
+  }
+
+  100% {
+    border: 2px solid #fff5cc;
+    box-shadow: 0px 0px 100px #fff5cc, inset 0px 0px 10px #fff5cc,
+      0px 0px 5px rgb(255, 255, 255);
+  }
+}
+
+@keyframes iconflicker {
+  0% {
+    opacity: 1;
+  }
+
+  5% {
+    opacity: 0.2;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.2;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

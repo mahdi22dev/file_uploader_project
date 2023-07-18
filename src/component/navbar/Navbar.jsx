@@ -32,7 +32,7 @@ const Navbar = () => {
         <ul className={styled.nav_links}>
           <Link href={"/"}>Home</Link>
           <Link href={"/blog"}>blog</Link>
-          <Link href={"docs"}>docs</Link>
+          <Link href={"/docs"}>API</Link>
           <Link href={"/contact"}>contact</Link>
         </ul>
         <div className={styled.theme}>

@@ -1,4 +1,4 @@
-import { db } from "@/lib/utils/firebase";
+import { db } from "@/lib/firebase";
 import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { NextResponse } from "next/server";
 const colref = collection(db, "files");

@@ -1,0 +1,14 @@
+.dark {
+  background-color: black;
+  color: #fff;
+}
+.white {
+  background-color: var(--background-color);
+  color: var(--headline);
+}
+.theme {
+  transition: 0.4s;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

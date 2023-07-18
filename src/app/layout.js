@@ -1,7 +1,6 @@
-import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeProvider } from "@/context/themecontext/ThemeContext";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import mongoose from "mongoose";
 import Navbar from "@/component/navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });

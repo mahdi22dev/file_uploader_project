@@ -5,7 +5,9 @@ import styles from "./theme.module.css";
 const ThemeContext = React.createContext();
 const ThemeProvider = ({ children }) => {
   const [themeToggle, setThemeToggle] = useState("dark");
-  const toogleMode = () => {
+  const [fileContext, setFileContext] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const toggleMode = () => {
     setThemeToggle((prev) => {
       return prev == "dark" ? "white" : "dark";
     });
@@ -14,7 +16,12 @@ const ThemeProvider = ({ children }) => {
     <ThemeContext.Provider
       value={{
         setThemeToggle,
-        toogleMode,
+        toggleMode,
+        themeToggle,
+        fileContext,
+        setFileContext,
+        loading,
+        setLoading,
       }}
     >
       <main

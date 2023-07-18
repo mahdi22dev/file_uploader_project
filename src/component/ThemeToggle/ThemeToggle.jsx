@@ -1,16 +1,15 @@
 "use client";
-import { useGlobalContext } from "@/context/ThemeContext";
+import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import React from "react";
+import { BsFillMoonFill, BsLightbulbFill } from "react-icons/bs";
+import styled from "./theme.module.css";
 
 const ThemeToggle = () => {
-  const { toogleMode } = useGlobalContext();
+  const { toggleMode, themeToggle } = useGlobalContext();
   return (
-    <button
-      // style={{ width: "200px", backgroundColor: "red" }}
-      onClick={toogleMode}
-    >
-      change theme
-    </button>
+    <div onClick={toggleMode} className={styled.container}>
+      {themeToggle == "dark" ? <BsLightbulbFill /> : <BsFillMoonFill />}
+    </div>
   );
 };
 
