@@ -6,7 +6,7 @@ import puppeteer from "puppeteer";
 
 // export const dynamicParams = true;
 
-export async function generateStaticParams() {
+export async function generateStaticParams({ params }) {
   const response = await fetch(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
     { cache: "force-cache" }
