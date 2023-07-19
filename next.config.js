@@ -5,7 +5,6 @@ const nextConfig = {
   async headers() {
     return [
       {
-        target: "serverless",
         // matching all API routes
         source: "/api/:path*",
         headers: [
