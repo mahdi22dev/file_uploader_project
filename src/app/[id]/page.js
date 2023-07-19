@@ -53,7 +53,7 @@ export default async function Page({ params }) {
         <h2>file size: {size?.readable}</h2>
         <button className={styled.button}>
           <span>
-            <a href={"www.google.com"}>
+            <a href={scrTxt}>
               <SlCloudDownload />
               Download
             </a>
@@ -62,5 +62,4 @@ export default async function Page({ params }) {
       </main>
     </>
   );
-  // ...
 }

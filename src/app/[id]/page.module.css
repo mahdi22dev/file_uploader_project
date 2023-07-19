@@ -5,7 +5,9 @@
   flex-direction: column;
   width: 100%;
 }
-
+.not_found {
+  min-height: 80vh;
+}
 .button {
   position: relative;
   font-family: inherit;

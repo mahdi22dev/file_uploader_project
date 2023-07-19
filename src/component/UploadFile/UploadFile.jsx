@@ -7,11 +7,16 @@ import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
 import Links from "../links/Links";
+import { usePathname } from "next/navigation";
 
 const UploadFile = () => {
   const { fileContext, setLoading } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
+
+  const pathname = usePathname();
+  console.log(pathname);
+
   const handleUpload = async () => {
     if (fileContext) {
       setLoading(true);
@@ -28,7 +33,13 @@ const UploadFile = () => {
         console.log(data);
         setLoading(false);
         const { id, name } = data?.info?.data?.file?.metadata;
-        const link = `localhost:3000/${id}`;
+        let link = `${pathname}${id}`;
+        if (pathname == "/") {
+          link = `http://localhost:3000/${id}`;
+        } else {
+          link = `${pathname}/${id}`;
+        }
+
         const linkObj = { id, link, name };
         setLinks([...links, linkObj]);
       } catch (error) {
