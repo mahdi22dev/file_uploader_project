@@ -4,7 +4,7 @@ import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import puppeteer from "puppeteer";
 
-// export const dynamicParams = true;
+export const dynamicParams = true;
 
 export async function generateStaticParams({ params }) {
   const response = await fetch(
