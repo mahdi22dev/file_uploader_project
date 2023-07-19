@@ -3,10 +3,7 @@ import { notFound } from "next/navigation";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import puppeteer from "puppeteer";
-
 export const dynamicParams = true;
-export const dynamic = "auto";
-export const revalidate = 60;
 
 export async function generateStaticParams() {
   const response = await fetch(
