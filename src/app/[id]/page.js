@@ -5,7 +5,9 @@ import { SlCloudDownload } from "react-icons/sl";
 import puppeteer from "puppeteer";
 
 export const dynamicParams = true;
+export const dynamic = "auto";
 export const revalidate = 60;
+
 export async function generateStaticParams() {
   const response = await fetch(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
