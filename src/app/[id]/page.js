@@ -1,22 +1,23 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { db } from "@/lib/firebase";
-import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
-let files = [];
-
-const getdata = async () => {
-  const fileref = collection(db, `/files/`);
-  onSnapshot(fileref, (snapshot) => {
-    files = snapshot.docs.map((doc) => {
-      return { id: doc.id };
-    });
-  });
-};
+import styled from "./page.module.css";
+import { SlCloudDownload } from "react-icons/sl";
+import puppeteer from "puppeteer";
 
 export async function generateStaticParams() {
-  await getdata();
-
-  return files;
+  const response = await fetch(
+    "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
+    { cache: "force-cache" }
+  );
+  const data = await response.json();
+  const files = Object.keys(data).map((key) => ({
+    ...data[key],
+  }));
+  const list = Object.keys(files[0]).map((obj) => {
+    return { id: obj.toString() };
+  });
+  console.log(list);
+  return list;
 }
 
 export default async function Page({ params }) {
@@ -27,17 +28,36 @@ export default async function Page({ params }) {
     return notFound();
   }
   const data = await res.json();
+  const { full } = data?.data?.file.url;
+  const { name, size } = data?.data?.file?.metadata;
 
-  const { name, id, size } = data?.data?.file?.metadata;
+  // puppeteer to scrap download url
+  const browser = await puppeteer.launch({ headless: "new" });
+  const page = await browser.newPage();
+  await page.setUserAgent(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
+  );
+  await page.goto(full);
+  const [el] = await page.$x('//*[@id="download-url"]');
+  const href = await el.getProperty("href");
+  const scrTxt = await href.jsonValue();
+  console.log(scrTxt);
+  browser.close();
+
   return (
     <>
-      <div>
-        <h1>file info</h1>
-        <p>{params.id}</p>
-        <p>{name}</p>
-        <p>{id}</p>
-        <p>{size?.readable}</p>
-      </div>
+      <main className={styled.container}>
+        <h2>File Name: {name}</h2>
+        <h2>file size: {size?.readable}</h2>
+        <button className={styled.button}>
+          <span>
+            <a href={"www.google.com"}>
+              <SlCloudDownload />
+              Download
+            </a>
+          </span>
+        </button>
+      </main>
     </>
   );
   // ...

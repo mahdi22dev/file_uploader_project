@@ -1,8 +1,20 @@
+.values {
+  --color-primary-a0: #ffffff;
+  --color-primary-a10: #fff5cc;
+  --color-primary-a20: #ffeb99;
+  --color-primary-a30: #ffe162;
+  --color-primary-a50: #ffd803;
+  --color-primary-a60: #b99d17;
+  --color-primary-a70: #786619;
+  --color-primary-a80: #3d3413;
+  --color-primary-a90: #000000;
+}
 .form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url(/public/pexels-pixabay-259915.jpg);
 }
 .display {
   padding: 20px;
@@ -14,6 +26,27 @@
   color: var(--color-primary-a10);
   margin-right: 10px;
 }
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 350px;
+  height: 40px;
+  padding: 15px;
+  background-color: var(--color-primary-a70);
+  color: #ffff;
+  border-radius: 10px;
+}
+
+.links p {
+  margin-bottom: 0;
+}
+.links svg {
+  color: var(--color-primary-a10);
+  cursor: pointer;
+}
+
 .button {
   position: relative;
   font-family: inherit;

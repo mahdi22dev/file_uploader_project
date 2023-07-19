@@ -1,6 +1,4 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import ThemeToggle from "@/component/ThemeToggle/ThemeToggle";
 import UploadFile from "@/component/UploadFile/UploadFile";
 import { ToastContainer } from "react-toastify";
 

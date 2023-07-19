@@ -6,6 +6,7 @@
 :root {
   background-color: #fff;
   color: #333;
+
   /** CSS PRIMARY COLORS */
   --color-primary-a0: #ffffff;
   --color-primary-a10: #fff5cc;
@@ -33,8 +34,10 @@
 }
 
 body {
-  overflow: hidden;
+  overflow-x: hidden;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   min-width: 100vw;
   font-size: 100%;
   background: white;

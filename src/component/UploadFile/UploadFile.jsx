@@ -6,15 +6,17 @@ import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
-const UploadFile = () => {
-  const { fileContext, setFileContext, setLoading } = useGlobalContext();
-  const [Error, setError] = useState(false);
+import Links from "../links/Links";
 
+const UploadFile = () => {
+  const { fileContext, setLoading } = useGlobalContext();
+  const [Error, setError] = useState(false);
+  const [links, setLinks] = useState([]);
   const handleUpload = async () => {
     if (fileContext) {
       setLoading(true);
       const formData = new FormData();
-      console.log(fileContext[0]);
+
       formData.append("file", fileContext[0]);
 
       try {
@@ -24,9 +26,11 @@ const UploadFile = () => {
         });
         const data = await res.json();
         console.log(data);
-        setFileContext([]);
         setLoading(false);
-        // redirect user to they re file page or show copy paste link
+        const { id, name } = data?.info?.data?.file?.metadata;
+        const link = `localhost:3000/${id}`;
+        const linkObj = { id, link, name };
+        setLinks([...links, linkObj]);
       } catch (error) {
         setLoading(false);
         setError(true);
@@ -56,7 +60,7 @@ const UploadFile = () => {
       <MyDropzone />
       {/* selected file display */}
       <div className={styled.display}>
-        {fileContext.map((file) => {
+        {fileContext?.map((file) => {
           return (
             <>
               <p>
@@ -75,6 +79,10 @@ const UploadFile = () => {
           Upload
         </span>
       </button>
+
+      {links?.map((link) => {
+        return <Links key={link.id} className={styled.links} link={link} />;
+      })}
     </form>
   );
 };

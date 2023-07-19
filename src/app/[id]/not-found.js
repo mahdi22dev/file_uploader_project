@@ -1,7 +1,7 @@
 import React from "react";
 
 const NotFound = () => {
-  return <div>fuck you</div>;
+  return <main>The file you are looking for does not exist.</main>;
 };
 
 export default NotFound;

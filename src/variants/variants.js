@@ -4,7 +4,7 @@ export const navbarVariants = {
     x: "0",
     transition: {
       type: "spring",
-      stiffness: 300,
+      stiffness: 230,
       damping: 25,
       velocity: 10,
       duration: 0.2,
@@ -13,7 +13,7 @@ export const navbarVariants = {
   },
   closed: {
     opacity: 0,
-    x: 100,
+    x: "100vw",
     transition: { duration: 0.4, opacity: { duration: 0.4 } },
   },
 };

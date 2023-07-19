@@ -25,6 +25,9 @@
   cursor: pointer;
   background-color: var(--color-primary-a70);
 }
+.dropzone:hover {
+  background-color: var(--color-primary-a60);
+}
 
 .light {
   border: 10px solid var(--color-primary-a10);

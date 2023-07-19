@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "./dropzone.module.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
@@ -7,9 +7,10 @@ import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 // to utils
 
 let rejected = [];
+
 export default function MyDropzone() {
-  const { fileContext, setFileContext, themeToggle, loading } =
-    useGlobalContext();
+  const { setFileContext, themeToggle, loading } = useGlobalContext();
+
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
       setFileContext(() => [
@@ -26,11 +27,16 @@ export default function MyDropzone() {
     maxFiles: 1,
     maxSize: 1073741824,
   });
+
   const classname =
     themeToggle == "white" ? ` ${styled.light}` : `${styled.dropzone} `;
+
   return (
     <>
-      <div {...getRootProps({ className: classname })}>
+      <div
+        {...getRootProps({ className: classname })}
+        style={{ backgroundColor: isDragActive && " var(--color-primary-a60)" }}
+      >
         {loading ? (
           <>
             <div className={styled.loader}></div>

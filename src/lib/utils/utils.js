@@ -20,3 +20,23 @@ export const notify = () =>
       color: "#fff",
     },
   });
+export const notifyClipBoard = () =>
+  toast.success("link copied to your clipboard", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+    bodyStyle: { color: " var(--color-primary-a10" },
+    progressStyle: { backgroundColor: " var(--color-primary-a10)" },
+    style: {
+      color: "#fff",
+    },
+  });
+
+export const copyToclipBoard = (link) => {
+  navigator.clipboard.writeText(link);
+};
