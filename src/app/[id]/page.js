@@ -2,7 +2,9 @@ import React from "react";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import { fetchHook } from "@/lib/hooks/hooks";
-import { FetchdownloadURL } from "@/lib/utils/puppeteer";
+// import { FetchdownloadURL } from "@/lib/utils/puppeteer";
+// import puppeteer from "puppeteer";
+// import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 
 export const dynamicParams = true;
 
@@ -24,16 +26,24 @@ export async function generateStaticParams({ params }) {
 }
 
 export default async function Page({ params }) {
-  const data = await fetchHook(
-    `https://api.anonfiles.com/v2/file/${params.id}/info`,
-    {}
-  );
+  let data;
+  try {
+    const response = await fetch(
+      `https://api.anonfiles.com/v2/file/${params.id}/info`
+    );
+    if (!response.ok) {
+      return notFound();
+    }
+    data = await response.json();
+  } catch (error) {
+    console.log(error);
+  }
 
-  const { full } = data?.data?.file.url;
-  const { name, size } = data?.data?.file?.metadata;
+  const { full } = await data?.data?.file.url;
+  const { name, size } = await data?.data?.file?.metadata;
+  console.log(data);
 
-  // puppeteer to scrap download url
-  const downloadURL = await FetchdownloadURL(full);
+  // const downloadURL = await FetchdownloadURL(full);
 
   return (
     <>

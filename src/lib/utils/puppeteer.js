@@ -20,11 +20,8 @@ export const FetchdownloadURL = async (full) => {
   //     ignoreHTTPSErrors: true,
   //   };
   // }
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.setUserAgent(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
-  );
   await page.goto(full);
   const [el] = await page.$x('//*[@id="download-url"]');
   const href = await el.getProperty("href");

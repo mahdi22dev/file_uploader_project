@@ -8,7 +8,5 @@ export const fetchHook = async (url, options) => {
     }
     const data = await response.json();
     return data;
-  } catch (error) {
-    throw new Error("somthing wrong happened");
-  }
+  } catch (error) {}
 };
