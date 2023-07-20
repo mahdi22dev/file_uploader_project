@@ -7,7 +7,7 @@
 //   puppeteer = require("puppeteer");
 // }
 
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 
 export const FetchdownloadURL = async (full) => {
   // let options = {};
