@@ -33,7 +33,7 @@ const UploadFile = () => {
         console.log(data);
         setLoading(false);
         const { id, name } = data?.info?.data?.file?.metadata;
-        let link = `${pathname}${id}`;
+        let link;
         if (pathname == "/") {
           link = `http://localhost:3000/${id}`;
         } else {
