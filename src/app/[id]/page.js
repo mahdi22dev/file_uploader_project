@@ -16,7 +16,7 @@ export const metadata = {
 export async function generateStaticParams({ params }) {
   const data = await fetchHook(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
-    { cache: "force-cache" }
+    { next: { revalidate: 60 } }
   );
 
   const files = Object.keys(data).map((key) => ({

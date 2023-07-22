@@ -1,11 +1,6 @@
 import Post from "@/component/blog/Post";
 import styled from "./page.module.css";
-const featured = [
-  { id: 1, title: "post1" },
-  { id: 2, title: "post2" },
-  { id: 3, title: "post3" },
-  { id: 4, title: "post3" },
-];
+import Link from "next/link";
 export default async function Page({}) {
   return (
     <>
@@ -20,6 +15,7 @@ export default async function Page({}) {
             <p>third</p>
           </div>
         </div>
+        <Link href={"./blog/posts"}>all posts</Link>
       </main>
     </>
   );
