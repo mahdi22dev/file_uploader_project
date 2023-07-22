@@ -6,7 +6,6 @@
 :root {
   background-color: #fff;
   color: #333;
-
   /** CSS PRIMARY COLORS */
   --color-primary-a0: #ffffff;
   --color-primary-a10: #fff5cc;
@@ -20,7 +19,6 @@
   /* background and text */
   --background-color: #fffffe;
   --headline: #272343;
-
   /* button */
   --button-bg-color: #ffd803;
   --button-text: #272343;

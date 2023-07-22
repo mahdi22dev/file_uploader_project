@@ -1,9 +1,11 @@
 "use client";
 import React, { useContext, useState } from "react";
-import styles from "./theme.module.css";
+import styles from "./context.module.css";
+import { usePathname } from "next/navigation";
 
-const ThemeContext = React.createContext();
-const ThemeProvider = ({ children }) => {
+const GlobalContext = React.createContext();
+const ContextProvidor = ({ children }) => {
+  const pathname = usePathname();
   const [themeToggle, setThemeToggle] = useState("dark");
   const [fileContext, setFileContext] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,7 +16,7 @@ const ThemeProvider = ({ children }) => {
     });
   };
   return (
-    <ThemeContext.Provider
+    <GlobalContext.Provider
       value={{
         setThemeToggle,
         toggleMode,
@@ -23,8 +25,10 @@ const ThemeProvider = ({ children }) => {
         setFileContext,
         loading,
         setLoading,
+        pathname,
       }}
     >
+      {/* theme providor */}
       <main
         className={`${styles.theme} ${
           themeToggle === "dark" ? styles.dark : styles.white
@@ -32,14 +36,14 @@ const ThemeProvider = ({ children }) => {
       >
         {children}
       </main>
-    </ThemeContext.Provider>
+    </GlobalContext.Provider>
   );
 };
 
 // make sure use the global context for less code
 
 export const useGlobalContext = () => {
-  return useContext(ThemeContext);
+  return useContext(GlobalContext);
 };
 
-export { ThemeContext, ThemeProvider };
+export { GlobalContext, ContextProvidor };

@@ -18,7 +18,6 @@
 .main h1 {
   text-align: center;
   font-size: clamp(50x, 7.5vw, 70px);
-  color: var(--color-primary-a10);
 }
 
 /* loading page */
@@ -42,6 +41,16 @@
   border-radius: 50%;
   border-color: #dbdcef var(--color-primary-a10);
   animation: spinner-e04l1k 2s infinite linear;
+}
+
+/* error page */
+.error {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .spinner::before,

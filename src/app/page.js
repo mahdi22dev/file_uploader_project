@@ -2,7 +2,7 @@ import styles from "./page.module.css";
 import UploadFile from "@/component/UploadFile/UploadFile";
 import { ToastContainer } from "react-toastify";
 
-export default function Home() {
+export default function Home(req) {
   return (
     <main className={styles.main}>
       <h1>Anonymous File Upload</h1>
@@ -16,7 +16,7 @@ export default function Home() {
         pauseOnFocusLoss
         theme='dark'
       />
-      <UploadFile />
+      <UploadFile req={req} />
     </main>
   );
 }

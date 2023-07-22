@@ -7,6 +7,9 @@
 }
 .not_found {
   min-height: 80vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .button {
   position: relative;

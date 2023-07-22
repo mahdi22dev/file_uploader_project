@@ -1,3 +1,47 @@
 .container {
   min-height: 80vh;
+  max-width: 1700px;
+  padding: 20px;
+  padding-top: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+.container h2 {
+}
+.container p:nth-child(1) {
+  color: red;
+}
+
+/* featured blog posts */
+
+.featured {
+  display: flex;
+  flex-direction: column;
+}
+.first_featured_post {
+  width: 500px;
+  height: 500px;
+  background-color: aquamarine;
+  border: 1px solid yellow;
+  margin-right: 20px;
+}
+.left_featured_posts {
+}
+
+/* post styled from derectories */
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(1, 80%);
+  place-content: center;
+  gap: 3rem;
+}
+@media (min-width: 600px) {
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(2, 400px);
+  }
+  .featured {
+    flex-direction: row;
+  }
 }

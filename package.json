@@ -10,10 +10,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "axios": "^1.4.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
-    "firebase": "^10.0.0",
     "framer-motion": "^10.12.21",
     "mongodb": "^5.7.0",
     "mongoose": "^7.3.4",
@@ -22,6 +23,8 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.10.1",
+    "react-query": "^3.39.3",
+    "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^9.1.3"
   }
 }

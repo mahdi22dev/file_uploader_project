@@ -2,12 +2,17 @@ import React from "react";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import { fetchHook } from "@/lib/hooks/hooks";
+import { notFound } from "next/navigation";
 // import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 // import puppeteer from "puppeteer";
 // import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 
 export const dynamicParams = true;
 
+export const metadata = {
+  title: "file name",
+  descreption: "",
+};
 export async function generateStaticParams({ params }) {
   const data = await fetchHook(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
@@ -26,22 +31,18 @@ export async function generateStaticParams({ params }) {
 }
 
 export default async function Page({ params }) {
-  let data;
-  try {
-    const response = await fetch(
-      `https://api.anonfiles.com/v2/file/${params.id}/info`
-    );
-    if (!response.ok) {
-      return notFound();
-    }
-    data = await response.json();
-  } catch (error) {
-    console.log(error);
+  const response = await fetch(
+    `https://api.anonfiles.com/v2/file/${params.id}/info`
+  );
+  if (!response.ok) {
+    return notFound();
   }
-
+  const data = await response.json();
+  if (!data) {
+    return notFound();
+  }
   const { full } = await data?.data?.file.url;
   const { name, size } = await data?.data?.file?.metadata;
-  console.log(data);
 
   // const downloadURL = await FetchdownloadURL(full);
 
@@ -52,7 +53,7 @@ export default async function Page({ params }) {
         <h2>file size: {size?.readable}</h2>
         <button className={styled.button}>
           <span>
-            <a href={downloadURL}>
+            <a href={""}>
               <SlCloudDownload />
               Download
             </a>
