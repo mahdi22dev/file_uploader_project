@@ -39,24 +39,29 @@ export const postFile = {
 
 export const code1 = (currentUrl) => {
   return `
+  const url = "${currentUrl}/upload"
+
   const options = , {
       method: "POST",
       body: formData,
     },
 
-   const res = await fetch("${currentUrl}/upload",{options})
+   const res = await fetch(url,{options})
 
-    const data = await res.json();
+   const data = await res.json();
 
-    const { id, name } = info?.data?.file?.metadata;
+   const { id, name } = data?.results?.metadata;
     `;
 };
 export const code2 = (currentUrl) => {
-  return ` const res = await fetch("${currentUrl}")
+  return `
+    const url = "${currentUrl}"
+
+    const res = await fetch(url)
   
     const data = await res.json();
 
-    const { id, name } = info?.data?.file?.metadata;
+     const { id, name } = info?.data?.file?.metadata;
     
     `;
 };

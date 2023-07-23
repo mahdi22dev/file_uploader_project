@@ -32,7 +32,7 @@
 .syntax div {
   width: 100%;
   padding: 0px;
-  padding-left: 5px;
+  padding-top: 5px;
   padding-right: 20px;
   padding-left: 5px;
   justify-content: space-between;
@@ -46,8 +46,8 @@
 .syntax div:nth-child(1) {
   display: flex;
   width: 100%;
-  height: 50px;
   background-color: transparent;
+  height: 80px;
 }
 
 .syntax div:nth-child(2) {
