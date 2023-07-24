@@ -3,7 +3,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <main>{params.postid}</main>
+      <main>{params.slug}</main>
     </>
   );
 }

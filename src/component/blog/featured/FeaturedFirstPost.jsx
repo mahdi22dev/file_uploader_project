@@ -2,44 +2,43 @@ import React from "react";
 import styled from "../styles.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { FetchFeaturedfirstPost } from "@/lib/utils/utils";
 
-const first_post = {
-  id: 1,
-  readTime: 8,
-  title: "how to use api handler in next js 13 app router",
-  image: "/next.png",
-  profileName: "mahdi idrissi",
-  imageProfile: "/next.png",
-  date: "",
-};
+const FeaturedFirstPost = async () => {
+  const FeaturedfirstPost = await FetchFeaturedfirstPost();
 
-const FeaturedFirstPost = () => {
+  const { title, slug, readtime, date, author, image } =
+    FeaturedfirstPost?.items?.[0]?.fields;
+  console.log(author);
+
   return (
     <>
       <div className={styled.first_featured_post_image}>
         <Image
-          src={"/tech.jpg"}
-          placeholder='blue'
-          alt='next js app image'
+          src={`https:${image.fields.file.url}`}
+          alt={image.fields.file.title}
           fill
         ></Image>
       </div>
-      <p className={styled.readtime}>{first_post.readTime} min to read</p>
-      <Link href={`/blog/posts/${first_post.id}`}>
-        <p className={styled.featured_title}>{first_post.title}</p>
+
+      <p className={styled.readtime}>{readtime} min to read</p>
+      <Link href={`/blog/posts/${slug}`}>
+        <p className={styled.featured_title}>{title}</p>
       </Link>
+
+      {/* into profile component */}
       <div className={styled.profile}>
         <div className={styled.profile_image}>
           <Image
-            src={"/profile.jpg"}
+            src={`https:${author.fields.picture.fields.file.url}`}
+            alt={author.fields.picture.fields.file.title}
             fill
-            placeholder='blue'
-            alt='profile name'
           ></Image>
         </div>
         <div className={styled.profile_info}>
-          <p className={styled.profile_name}>mahdi idrissi</p>
-          <p className={styled.publish_date}>23/7/2023</p>
+          <p className={styled.profile_name}>{author.fields.title}</p>
+          {/* format data */}
+          <p className={styled.publish_date}>{date}</p>
         </div>
       </div>
     </>

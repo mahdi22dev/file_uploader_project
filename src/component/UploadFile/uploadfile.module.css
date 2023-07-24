@@ -16,6 +16,9 @@
   flex-direction: column;
   /* background-image: url(/public/pexels-pixabay-259915.jpg); */
 }
+.limits {
+  font-size: clamp(11px, 1vw, 17px);
+}
 .display {
   padding: 20px;
   display: flex;

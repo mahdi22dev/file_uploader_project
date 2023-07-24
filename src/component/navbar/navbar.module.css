@@ -40,9 +40,9 @@
   font-size: 30px;
   padding: 1px;
   cursor: pointer;
-  background-color: transparent;
   color: var(--color-primary-a10);
   border: 0;
+  background-color: transparent;
 }
 .logo {
   height: 100%;
@@ -54,8 +54,7 @@
   padding-bottom: 40px;
   padding-top: 10px;
 }
-.logo p {
-}
+
 .color {
   color: var(--color-primary-a10);
   font-weight: 700;

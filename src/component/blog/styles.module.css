@@ -32,6 +32,10 @@
   font-size: clamp(18px, 1.3vw, 21px);
   font-weight: 600;
   padding-left: 15px;
+  transition: 0.3s color;
+}
+.featured_title:hover {
+  color: #fff5cc;
 }
 /* left posts */
 
@@ -43,11 +47,10 @@
   margin-bottom: 15px;
   padding: 10px;
   gap: 20px;
-  padding: 20px;
 }
 
 .left_featured_posts_image {
-  width: 300px;
+  min-width: 200px;
   height: 150px;
   min-height: 100px;
   position: relative;
@@ -58,6 +61,10 @@
 }
 .left_featured_posts_title {
   padding: 10px;
+  transition: 0.3s color;
+}
+.left_featured_posts_title:hover {
+  color: #fff5cc;
 }
 /* general styled for both left posts and first post */
 
@@ -88,6 +95,7 @@
   object-fit: cover;
 }
 .profile_info {
+  font-size: clamp(11px, 1vw, 16px);
 }
 .profile_info p {
   margin: 0;

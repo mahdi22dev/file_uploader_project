@@ -22,6 +22,7 @@
 }
 .container h2 {
   margin-top: 0px;
+  text-align: center;
 }
 .syntax {
   width: min(80%, 600px);

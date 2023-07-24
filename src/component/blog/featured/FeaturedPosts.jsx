@@ -13,25 +13,31 @@ const first_post = {
   date: "",
 };
 
-const FeaturedPosts = () => {
+const FeaturedPosts = ({ post }) => {
+  const { title, slug, readtime, date, author, image } = post.fields;
+
   return (
     <div className={styled.left_featured_posts}>
       <div className={styled.left_featured_posts_image}>
         <Image
-          src={"/mobile1.jpg"}
-          placeholder='blue'
-          alt='next js app image'
+          src={`https:${image.fields.file.url}`}
+          alt={image.fields.file.title}
           fill
         ></Image>
       </div>
 
       <div>
-        <Link href={`/blog/posts/${first_post.id}`}>
-          <p className={styled.left_featured_posts_title}>{first_post.title}</p>
+        <Link href={`/blog/posts/${slug}`}>
+          <p className={styled.left_featured_posts_title}>{title}</p>
         </Link>
+        {/* into profile component */}
         <div className={styled.profile}>
           <div className={styled.profile_image}>
-            <Image src={"/profile.jpg"} fill></Image>
+            <Image
+              src={`https:${author.fields.picture.fields.file.url}`}
+              alt={author.fields.picture.fields.file.title}
+              fill
+            ></Image>
           </div>
           <div className={styled.profile_info}>
             <p className={styled.profile_name}>mahdi idrissi</p>

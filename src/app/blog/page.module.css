@@ -40,6 +40,30 @@
 
   /* border: 3px solid red; */
 }
+.more {
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 50px;
+  display: grid;
+  place-content: center;
+  background-color: #fff5cc;
+  color: black;
+  transition-property: color background;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+.more:hover {
+  background-color: transparent;
+  color: #fff5cc;
+  border: 1px solid #fff5cc;
+}
+
+.more a {
+  width: 100%;
+  height: 100%;
+}
 /* post styled from derectories */
 
 .posts {

@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { client } from "./contentful";
 
 export function bytesToSize(bytes) {
   const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -55,4 +56,30 @@ export const codeCopy = () =>
 
 export const copyToclipBoard = (link) => {
   navigator.clipboard.writeText(link);
+};
+export const FetchFeaturedfirstPost = async () => {
+  try {
+    const FeaturedfirstPost = await client.getEntries({
+      content_type: "nextBlog",
+      limit: 1,
+    });
+
+    return FeaturedfirstPost;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const FetchFeaturedPosts = async () => {
+  try {
+    const FeaturedPosts = await client.getEntries({
+      content_type: "nextBlog",
+      limit: 4,
+      skip: 1,
+    });
+
+    return FeaturedPosts;
+  } catch (error) {
+    throw new Error(error);
+  }
 };

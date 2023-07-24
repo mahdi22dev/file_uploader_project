@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import MyDropzone from "../dropzone/Dropzone";
+import MyDropzone from "@/component/dropzone/Dropzone";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
-import Links from "../links/Links";
+import Links from "@/component/links/Links";
 
 const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();
@@ -54,10 +54,10 @@ const UploadFile = ({ req }) => {
         e.preventDefault();
       }}
     >
-      <em>
+      <p className={styled.limits}>
         (1 file is the maximum number of files you can drop here and 1gb max
         size)
-      </em>
+      </p>
       <MyDropzone />
       {/* selected file display */}
       <div className={styled.display}>
