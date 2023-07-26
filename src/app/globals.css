@@ -22,6 +22,8 @@
   /* button */
   --button-bg-color: #ffd803;
   --button-text: #272343;
+  /* others */
+  --sticky-navbar: #786619;
 }
 
 @media (prefers-color-scheme: dark) {

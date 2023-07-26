@@ -1,17 +1,3 @@
-/* blog component styles */
-
-/* post styles */
-.post {
-  background-color: yellow;
-  padding: 15px;
-}
-/* .desc {
-}
-.title {
-}
-.desc {
-} */
-
 /* featured blog posts */
 
 .first_featured_post_image {
@@ -50,14 +36,16 @@
 }
 
 .left_featured_posts_image {
-  min-width: 200px;
-  height: 150px;
-  min-height: 100px;
+  min-width: 250px;
+  min-height: 150px;
   position: relative;
 }
 .left_featured_posts_image img {
   border-radius: 5px;
   object-fit: cover;
+}
+.left_featured_posts_info {
+  height: 100%;
 }
 .left_featured_posts_title {
   padding: 10px;
@@ -92,16 +80,14 @@
 .profile_image img {
   border-radius: 100%;
   border: 1px solid #fff5cc;
-  object-fit: cover;
+  object-fit: contain;
 }
-.profile_info {
-  font-size: clamp(11px, 1vw, 16px);
-}
+
 .profile_info p {
+  font-size: clamp(13px, 1.3vw, 17px);
   margin: 0;
 }
-.profile_name {
-}
+
 @media (min-width: 960px) {
   .featured {
     gap: 3rem;
@@ -111,8 +97,12 @@
   .left_featured_posts {
     gap: 5px;
   }
-  .posts {
-    display: grid;
-    grid-template-columns: repeat(2, 400px);
+  .profile_info p {
+    width: 200px;
+  }
+}
+@media (max-width: 700px) {
+  .left_featured_posts {
+    display: none;
   }
 }
