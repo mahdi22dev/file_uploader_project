@@ -11,20 +11,21 @@ export default async function Page({}) {
       <main className={styled.container}>
         <p>Our blog</p>
 
+        <div className={styled.more}>
+          <Link href={"./blog/1"}> All Blog Posts</Link>
+        </div>
+        {/* first featured post */}
+        <p>latest posts</p>
         <div className={styled.featured}>
           <div className={styled.first_featured_post}>
             <FeaturedFirstPost />
           </div>
-
-          {/* componenet */}
+          {/* rest of posts */}
           <div className={styled.left_featured_posts_container}>
             {FeaturedPostsList.items.map((post) => {
-              return <FeaturedPosts post={post} />;
+              return <FeaturedPosts key={post.fields.slug} post={post} />;
             })}
           </div>
-        </div>
-        <div className={styled.more}>
-          <Link href={"./blog/posts"}> All blog posts</Link>
         </div>
       </main>
     </>

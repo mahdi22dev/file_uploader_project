@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
-import { fetchHook } from "@/lib/hooks/hooks";
 import { notFound } from "next/navigation";
 // import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 // import puppeteer from "puppeteer";
@@ -14,19 +13,18 @@ export const metadata = {
   descreption: "",
 };
 export async function generateStaticParams({ params }) {
-  const data = await fetchHook(
+  const response = await fetch(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
-    { next: { revalidate: 60 } }
+    { cache: "force-cache" }
   );
-
+  const data = await response.json();
   const files = Object.keys(data).map((key) => ({
     ...data[key],
   }));
-
   const list = Object.keys(files[0]).map((obj) => {
     return { id: obj.toString() };
   });
-
+  console.log(list);
   return list;
 }
 

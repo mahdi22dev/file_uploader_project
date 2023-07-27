@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
-import { client } from "./contentful";
+import { client } from "../contentful";
+import moment from "moment/moment";
 
 export function bytesToSize(bytes) {
   const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
@@ -74,7 +75,7 @@ export const FetchFeaturedPosts = async () => {
   try {
     const FeaturedPosts = await client.getEntries({
       content_type: "nextBlog",
-      limit: 4,
+      limit: 3,
       skip: 1,
     });
 
@@ -82,4 +83,41 @@ export const FetchFeaturedPosts = async () => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const FetchAllPosts = async () => {
+  try {
+    const FeaturedPosts = await client.getEntries({
+      content_type: "nextBlog",
+    });
+    return FeaturedPosts;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+export const FetchPaginationPosts = async (skip) => {
+  console.log(skip);
+  let FeaturedPosts;
+  try {
+    if (skip === 0) {
+      FeaturedPosts = await client.getEntries({
+        content_type: "nextBlog",
+        limit: 4,
+      });
+    } else {
+      FeaturedPosts = await client.getEntries({
+        content_type: "nextBlog",
+        limit: 4,
+        skip: skip,
+      });
+    }
+
+    return FeaturedPosts;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+export const formattedDate = (dateStr) => {
+  return moment(dateStr).format("MMMM DD, YYYY");
 };
