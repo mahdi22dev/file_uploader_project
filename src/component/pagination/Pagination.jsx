@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import styled from ".//pagination.module.css";
 import { FetchAllPosts } from "@/lib/utils/utils";
