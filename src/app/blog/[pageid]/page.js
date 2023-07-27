@@ -25,6 +25,7 @@ export default async function Page({ params }) {
 
   console.log(skip);
   const data = await FetchPaginationPosts(skip);
+  console.log(skip);
 
   return (
     <>
