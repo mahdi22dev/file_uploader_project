@@ -10,7 +10,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams({ params }) {
   const data = await FetchAllPosts();
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
   const pages = Math.ceil(data.items.length / itemsPerPage);
   const NewData = Array.from({ length: pages }, (_, idnex) => {
     const myindex = idnex + 1;
@@ -20,7 +20,7 @@ export async function generateStaticParams({ params }) {
 }
 
 export default async function Page({ params }) {
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
   let skip = itemsPerPage * params.pageid;
 
   console.log(skip);
