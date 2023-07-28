@@ -5,6 +5,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Image from "next/image";
 import HighLight from "@/component/blog/post/HighLight";
 import { client } from "@/lib/contentful";
+import { FetchAllPosts } from "@/lib/utils/utils";
 
 export const dynamicParams = true;
 export const FetchOnePost = async (slug) => {
