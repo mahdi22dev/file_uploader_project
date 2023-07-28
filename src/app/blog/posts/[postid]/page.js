@@ -6,8 +6,7 @@ import Image from "next/image";
 import HighLight from "@/component/blog/post/HighLight";
 import { client } from "@/lib/contentful";
 
-export const revalidate = 22222222;
-
+export const dynamicParams = true;
 export const FetchOnePost = async (slug) => {
   try {
     const MyBlogData = await client.getEntries({
@@ -19,6 +18,15 @@ export const FetchOnePost = async (slug) => {
     throw new Error(error);
   }
 };
+
+export async function generateStaticParams() {
+  const data = await FetchAllPosts();
+  console.log(data);
+  const NewData = data.items.map((item) => {
+    return { postid: item.fields.slug };
+  });
+  return NewData;
+}
 
 export default async function Page({ params }) {
   const slug = params.postid;
