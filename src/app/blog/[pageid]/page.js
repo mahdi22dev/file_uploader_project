@@ -6,7 +6,7 @@ import pagination from "../../../component/pagination/pagination.module.css";
 import Link from "next/link";
 import Pagination from "@/component/pagination/Pagination";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams({ params }) {
   const data = await FetchAllPosts();
