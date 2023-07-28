@@ -5,6 +5,7 @@
 .white {
   background-color: var(--background-color);
   color: var(--headline);
+  --color-primary-a10: #ffd803;
 }
 .theme {
   transition: 0.4s;

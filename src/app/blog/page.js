@@ -4,6 +4,8 @@ import FeaturedFirstPost from "@/component/blog/featured/FeaturedFirstPost";
 import FeaturedPosts from "@/component/blog/featured/FeaturedPosts";
 import { FetchFeaturedPosts } from "@/lib/utils/utils";
 
+export const fetchCache = "force-cache";
+
 export default async function Page({}) {
   const FeaturedPostsList = await FetchFeaturedPosts();
   return (

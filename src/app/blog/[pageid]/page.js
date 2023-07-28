@@ -10,7 +10,7 @@ export const dynamicParams = true;
 
 export async function generateStaticParams({ params }) {
   const data = await FetchAllPosts();
-  const itemsPerPage = 6;
+  const itemsPerPage = 4;
   const pages = Math.ceil(data.items.length / itemsPerPage);
   const NewData = Array.from({ length: pages }, (_, idnex) => {
     const myindex = idnex + 1;
@@ -20,24 +20,23 @@ export async function generateStaticParams({ params }) {
 }
 
 export default async function Page({ params }) {
-  const itemsPerPage = 6;
-  let skip = itemsPerPage * params.pageid;
+  const id = params.pageid;
+  const itemsPerPage = 4;
+  let skip = itemsPerPage * id - 4;
 
-  console.log(skip);
-  const data = await FetchPaginationPosts(skip);
-  console.log(skip);
+  const data = await FetchPaginationPosts(skip, id);
+  if (!data || !params.pageid) {
+    return notFound();
+  }
 
   return (
     <>
       <main className={styled.container}>
         <div className={styled.posts}>
-          {data.total == 0
-            ? notFound()
-            : data?.items.map((post) => {
-                return <PostCard key={post.fields.slug} post={post} />;
-              })}
+          {data?.items.map((post) => {
+            return <PostCard key={post.fields.slug} post={post} />;
+          })}
         </div>
-
         {/* pagination component */}
         <Pagination pageN={params.pageid} />
       </main>

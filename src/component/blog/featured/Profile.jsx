@@ -4,6 +4,7 @@ import Image from "next/image";
 import { formattedDate } from "@/lib/utils/utils";
 const Profile = ({ post, date }) => {
   const { author } = post.fields;
+
   return (
     <div className={styled.profile}>
       <div className={styled.profile_image}>

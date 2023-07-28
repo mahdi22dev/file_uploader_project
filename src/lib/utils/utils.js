@@ -96,11 +96,12 @@ export const FetchAllPosts = async () => {
   }
 };
 
-export const FetchPaginationPosts = async (skip) => {
+export const FetchPaginationPosts = async (skip, id) => {
   console.log(skip);
   let FeaturedPosts;
   try {
-    if (skip == 0) {
+    if (id == 1) {
+      console.log(skip);
       FeaturedPosts = await client.getEntries({
         content_type: "nextBlog",
         limit: 4,
@@ -118,6 +119,19 @@ export const FetchPaginationPosts = async (skip) => {
     throw new Error(error);
   }
 };
+
+export const FetchOnePost = async (slug) => {
+  try {
+    const MyBlogData = await client.getEntries({
+      content_type: "nextBlog",
+      "fields.slug": slug,
+    });
+    return MyBlogData;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export const formattedDate = (dateStr) => {
   return moment(dateStr).format("MMMM DD, YYYY");
 };

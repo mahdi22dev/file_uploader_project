@@ -1,0 +1,37 @@
+.container {
+  min-height: 80vh;
+  width: 100%;
+}
+
+.post {
+  max-width: 60%;
+  border: 3px solid red;
+  padding: 20px;
+  margin: 0 auto;
+}
+.cover {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 30px;
+}
+.span {
+  font-weight: 700;
+}
+.paragraph {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.code {
+  color: green;
+}
+.codeNew {
+  background-color: red;
+}
+
+@media (max-width: 700px) {
+  .post {
+    max-width: 80%;
+  }
+}
