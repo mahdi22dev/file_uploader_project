@@ -1,7 +1,7 @@
 import styled from "./page.module.css";
 import Link from "next/link";
-import FeaturedFirstPost from "@/component/blog/featured/FeaturedFirstPost";
-import FeaturedPosts from "@/component/blog/featured/FeaturedPosts";
+import FeaturedFirstPost from "@/components/blog/featured/FeaturedFirstPost";
+import FeaturedPosts from "@/components/blog/featured/FeaturedPosts";
 import { FetchFeaturedPosts } from "@/lib/utils/utils";
 
 export const fetchCache = "force-cache";

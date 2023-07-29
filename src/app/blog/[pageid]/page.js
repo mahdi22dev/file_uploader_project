@@ -1,17 +1,16 @@
 import { FetchAllPosts, FetchPaginationPosts } from "@/lib/utils/utils";
 import styled from "./posts.module.css";
-import PostCard from "@/component/blog/post_card/PostCard";
+import PostCard from "@/components/blog/post_card/PostCard";
 import { notFound } from "next/navigation";
-import pagination from "../../../component/pagination/pagination.module.css";
-import Link from "next/link";
-import Pagination from "@/component/pagination/Pagination";
+import Pagination from "@/components/pagination/Pagination";
 
 export const dynamicParams = false;
 
 export async function generateStaticParams({ params }) {
   const data = await FetchAllPosts();
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
   const pages = Math.ceil(data.items.length / itemsPerPage);
+
   const NewData = Array.from({ length: pages }, (_, idnex) => {
     const myindex = idnex + 1;
     return { pageid: myindex.toString() };
@@ -21,10 +20,11 @@ export async function generateStaticParams({ params }) {
 
 export default async function Page({ params }) {
   const id = params.pageid;
-  const itemsPerPage = 4;
-  let skip = itemsPerPage * id - 4;
+  const itemsPerPage = 6;
+  let skip = itemsPerPage * id - 6;
+  let limit = 6;
 
-  const data = await FetchPaginationPosts(skip, id);
+  const data = await FetchPaginationPosts(skip, id, limit);
   if (!data || !params.pageid) {
     return notFound();
   }

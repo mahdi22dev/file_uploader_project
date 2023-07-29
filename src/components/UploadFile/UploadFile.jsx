@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import MyDropzone from "@/component/dropzone/Dropzone";
+import MyDropzone from "@/components/dropzone/Dropzone";
 import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
-import Links from "@/component/links/Links";
+import Links from "@/components/links/Links";
 
 const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();

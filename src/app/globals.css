@@ -23,7 +23,7 @@
   --button-bg-color: #ffd803;
   --button-text: #272343;
   /* others */
-  --sticky-navbar: #786619;
+  --sticky-navbar: rgb(120, 102, 25, 0.5);
 }
 
 @media (prefers-color-scheme: dark) {

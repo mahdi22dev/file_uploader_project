@@ -6,6 +6,7 @@ import { FaCopy } from "react-icons/fa";
 import { copyToclipBoard } from "@/lib/utils/utils";
 import { SlCheck } from "react-icons/sl";
 import { code1, code2 } from "@/lib/utils/data";
+import { motion } from "framer-motion";
 
 const Highlighter = ({ link, requestType, response }) => {
   const [currentUrl, setCurrentUrl] = useState("");

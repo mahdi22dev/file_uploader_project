@@ -1,11 +1,13 @@
+"use client";
 import React from "react";
 import styled from ".//pagination.module.css";
 import { FetchAllPosts } from "@/lib/utils/utils";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default async function Pagination({ pageN }) {
   const data = await FetchAllPosts();
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
   const pages = Math.ceil(data.items.length / itemsPerPage);
   const NewData = Array.from({ length: pages }, (_, idnex) => {
     const myindex = idnex + 1;
@@ -13,7 +15,21 @@ export default async function Pagination({ pageN }) {
   });
 
   return (
-    <div className={styled.container}>
+    <motion.div
+      initial={{ opacity: 0, y: "100px" }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        ease: "linear",
+        transition: {
+          type: "spring",
+          stiffness: 50,
+          y: { duration: 0.5 },
+          opacity: { duration: 0.9 },
+        },
+      }}
+      className={styled.container}
+    >
       {NewData.map((page) => {
         return (
           <Link
@@ -29,6 +45,6 @@ export default async function Pagination({ pageN }) {
           </Link>
         );
       })}
-    </div>
+    </motion.div>
   );
 }

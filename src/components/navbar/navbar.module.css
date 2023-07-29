@@ -85,6 +85,7 @@
   }
   .fixed {
     background-color: var(--sticky-navbar);
+    backdrop-filter: blur(5px);
   }
   .nav_links {
     flex-direction: row;

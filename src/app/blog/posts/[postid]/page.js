@@ -3,7 +3,7 @@ import styled from "./posts.module.css";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Image from "next/image";
-import HighLight from "@/component/blog/post/HighLight";
+import HighLight from "@/components/blog/post/HighLight";
 import { client } from "@/lib/contentful";
 import { FetchAllPosts } from "@/lib/utils/utils";
 
@@ -22,7 +22,7 @@ export const FetchOnePost = async (slug) => {
 
 export async function generateStaticParams() {
   const data = await FetchAllPosts();
-  console.log(data);
+
   const NewData = data.items.map((item) => {
     return { postid: item.fields.slug };
   });
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const slug = params.postid;
   const post = await FetchOnePost(slug);
-  console.log(post);
+  console.log(post.items[0].fields.content);
 
   const cover = `https://${post.items[0].fields.image.fields.file.url}`;
   const alt = post.items[0].fields.image.fields.file.title;
@@ -40,7 +40,7 @@ export default async function Page({ params }) {
   const options = {
     renderMark: {
       [MARKS.BOLD]: (text) => <span className={styled.span}>{text}</span>,
-      [MARKS.CODE]: (text) => <HighLight>{text}</HighLight>,
+      [MARKS.CODE]: (text) => console.log(text),
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => (

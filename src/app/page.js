@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import UploadFile from "@/component/UploadFile/UploadFile";
+import UploadFile from "@/components/UploadFile/UploadFile";
 import { ToastContainer } from "react-toastify";
 
 export default function Home(req) {
