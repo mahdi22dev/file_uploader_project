@@ -6,10 +6,26 @@ import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 
 export const dynamicParams = true;
 
-export const metadata = {
-  title: "file name",
-  descreption: "",
-};
+export async function generateMetadata({ params }) {
+  const response = await fetch(
+    `https://api.anonfiles.com/v2/file/${params.id}/info`
+  );
+  if (!response.ok) {
+    return notFound();
+  }
+  const data = await response.json();
+  if (!data) {
+    return notFound();
+  }
+
+  const { name } = await data?.data?.file?.metadata;
+
+  return {
+    title: name,
+    description: "Uploadupia Anonymous File Upload ",
+  };
+}
+
 export async function generateStaticParams({ params }) {
   const response = await fetch(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
