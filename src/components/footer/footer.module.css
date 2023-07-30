@@ -1,9 +1,103 @@
 .footer {
-  margin-top: auto;
-  background-color: var(--color-primary-a80);
   width: 100%;
+  margin-top: 100px;
+  border-top: 3px solid var(--color-primary-a10);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.logo {
+  width: 20%;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  cursor: pointer;
+}
+.image {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.title {
+  font-size: clamp(22px, 1.6vw, 25px);
+  color: var(--color-primary-a10);
+  font-size: 600;
+  margin-bottom: 0px;
+}
+
+.links {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 50%;
+}
+.link {
+  text-transform: capitalize;
+  transition: color 0.4s;
+}
+.link:hover {
+  color: var(--color-primary-a10);
+}
+
+.divider {
+  height: 2px;
+  background-color: var(--color-primary-a10);
+  width: 60%;
+  margin: 15px auto;
+  opacity: 0.3;
+}
+.social {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--color-primary-a10);
+  border-radius: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.social svg {
+  font-size: 25px;
+  margin-top: 8px;
+  font-weight: 300;
+  color: var(--color-primary-a10);
+}
+.social svg:hover {
+  color: #fff;
+}
+.copy {
+  margin-top: 5px;
+}
+@media (max-width: 800px) {
+  .info {
+    flex-direction: column;
+  }
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
+  }
+  .links {
+    justify-content: space-around;
+  }
 }

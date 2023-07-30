@@ -12,7 +12,6 @@ export default async function Page({}) {
     <>
       <main className={styled.container}>
         <p>Our blog</p>
-
         <div className={styled.more}>
           <Link href={"./blog/1"}> All Blog Posts</Link>
         </div>
