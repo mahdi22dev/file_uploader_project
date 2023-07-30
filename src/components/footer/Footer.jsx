@@ -9,7 +9,7 @@ import { FaFacebookF, FaTwitter } from "react-icons/fa";
 const links = [
   { id: 1, name: "privacy", link: "/privacy" },
   { id: 2, name: "api", link: "/docs" },
-  { id: 2, name: "contact us", link: "/contact" },
+  { id: 3, name: "contact us", link: "/contact" },
 ];
 const social = [
   {
@@ -40,7 +40,7 @@ const Footer = () => {
         <div className={styled.links}>
           {links.map((link) => {
             return (
-              <Link className={styled.link} id={link.id} href={link.link}>
+              <Link className={styled.link} key={link.id} href={link.link}>
                 <p>{link.name}</p>
               </Link>
             );
@@ -51,13 +51,8 @@ const Footer = () => {
       <div className={styled.social}>
         {social.map((icon) => {
           return (
-            <div id={icon.id} className={styled.circle}>
-              <Link
-                target='_blank'
-                key={icon.id}
-                className={styled.link}
-                href={icon.link}
-              >
+            <div key={icon.id} className={styled.circle}>
+              <Link target='_blank' className={styled.link} href={icon.link}>
                 <icon.icon />
               </Link>
             </div>

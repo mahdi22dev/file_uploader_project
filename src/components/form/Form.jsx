@@ -41,7 +41,7 @@ const Form = () => {
   }, [sent]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} netlify>
       {sent ? (
         <Sent />
       ) : (
