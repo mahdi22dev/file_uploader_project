@@ -2,9 +2,7 @@ import React from "react";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import { notFound } from "next/navigation";
-// import { FetchdownloadURL } from "@/lib/utils/puppeteer";
-// import puppeteer from "puppeteer";
-// import { FetchdownloadURL } from "@/lib/utils/puppeteer";
+import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 
 export const dynamicParams = true;
 
@@ -42,7 +40,7 @@ export default async function Page({ params }) {
   const { full } = await data?.data?.file.url;
   const { name, size } = await data?.data?.file?.metadata;
 
-  // const downloadURL = await FetchdownloadURL(full);
+  const downloadURL = await FetchdownloadURL(full);
 
   return (
     <>
@@ -51,7 +49,7 @@ export default async function Page({ params }) {
         <h2>file size: {size?.readable}</h2>
         <button className={styled.button}>
           <span>
-            <a href={""}>
+            <a href={downloadURL}>
               <SlCloudDownload />
               Download
             </a>

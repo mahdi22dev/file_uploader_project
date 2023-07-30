@@ -41,8 +41,7 @@ const Form = () => {
   }, [sent]);
 
   return (
-    <form name='contact' onSubmit={handleSubmit} netlify>
-      <input type='hiddden' id='contact' name='contact' value={"contact"} />
+    <form onSubmit={handleSubmit}>
       {sent ? (
         <Sent />
       ) : (

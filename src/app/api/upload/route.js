@@ -1,15 +1,15 @@
-// import { db } from "@/lib/firebase";
-// import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { NextResponse } from "next/server";
-// const colref = collection(db, "files");
+const colref = collection(db, "files");
 
-// const adddata = async (id, name) => {
-//   await setDoc(doc(colref, id), {
-//     id: id,
-//     name: name,
-//     created_at: Timestamp.now(),
-//   });
-// };
+const adddata = async (id, name) => {
+  await setDoc(doc(colref, id), {
+    id: id,
+    name: name,
+    created_at: Timestamp.now(),
+  });
+};
 
 export async function POST(request) {
   let formData = await request.formData();
@@ -23,7 +23,7 @@ export async function POST(request) {
     console.log(info);
     const { id, name } = info?.data?.file?.metadata;
     const metadata = info?.data?.file?.metadata;
-    // await adddata(id, name);
+    await adddata(id, name);
     const results = { url: "url", metadata };
     return NextResponse.json(
       { message: "upload done", done: true, results },
