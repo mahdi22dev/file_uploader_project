@@ -4,8 +4,6 @@ import { SlCloudDownload } from "react-icons/sl";
 import { notFound } from "next/navigation";
 import { FetchdownloadURL } from "@/lib/utils/puppeteer";
 
-export const dynamicParams = true;
-
 export async function generateStaticParams({ params }) {
   const response = await fetch(
     "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
