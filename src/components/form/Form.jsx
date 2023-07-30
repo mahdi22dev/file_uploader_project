@@ -41,7 +41,13 @@ const Form = () => {
   }, [sent]);
 
   return (
-    <form name='contact' data-netlify='true' onSubmit={handleSubmit}>
+    <form
+      name='contact'
+      method='POST'
+      data-netlify='true'
+      onSubmit={handleSubmit}
+    >
+      <input value='contact' name='form-name' type='hidden' />
       <div className={styled.form_control}>
         <label className={styled.label} htmlFor='name'>
           Name:
