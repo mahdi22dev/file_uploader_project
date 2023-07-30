@@ -1,5 +1,6 @@
 import styles from "./page.module.css";
 import UploadFile from "@/components/UploadFile/UploadFile";
+import InfoSection from "@/components/infoSection/InfoSection";
 import { ToastContainer } from "react-toastify";
 
 export default function Home(req) {
@@ -17,6 +18,7 @@ export default function Home(req) {
         theme='dark'
       />
       <UploadFile req={req} />
+      <InfoSection />
     </main>
   );
 }

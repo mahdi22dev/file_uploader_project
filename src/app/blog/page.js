@@ -3,6 +3,7 @@ import Link from "next/link";
 import FeaturedFirstPost from "@/components/blog/featured/FeaturedFirstPost";
 import FeaturedPosts from "@/components/blog/featured/FeaturedPosts";
 import { FetchFeaturedPosts } from "@/lib/utils/utils";
+import Prefetch from "@/components/prefetch/Prefetch";
 
 export const fetchCache = "force-cache";
 
@@ -10,10 +11,12 @@ export default async function Page({}) {
   const FeaturedPostsList = await FetchFeaturedPosts();
   return (
     <>
+      {/* prefetch /blog/1 using useRouter */}
+      <Prefetch />
       <main className={styled.container}>
         <p>Our blog</p>
         <div className={styled.more}>
-          <Link href={"./blog/1"}> All Blog Posts</Link>
+          <Link href={"/blog/1"}> All Blog Posts</Link>
         </div>
         {/* first featured post */}
         <p>latest posts</p>

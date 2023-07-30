@@ -82,8 +82,12 @@
 .social svg:hover {
   color: #fff;
 }
+.circle:hover {
+  border-color: #fff;
+}
 .copy {
   margin-top: 5px;
+  color: var(--color-primary-a10);
 }
 @media (max-width: 800px) {
   .info {

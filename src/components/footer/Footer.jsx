@@ -32,7 +32,7 @@ const Footer = () => {
           }}
         >
           <div className={styled.image}>
-            <Image src={"/logo.png"} fill />
+            <Image src={"/logo2.png"} fill />
           </div>
           <p className={styled.title}>Uploadupia</p>
         </div>

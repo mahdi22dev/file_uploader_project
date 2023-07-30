@@ -8,7 +8,7 @@ import { motion, useScroll } from "framer-motion";
 import { navbarVariants } from "@/variants/variants";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import Image from "next/image";
-import logo from "./logo.png";
+import logo from "./logo2.png";
 
 const Navbar = () => {
   const [activeNavbar, setActiveNvabar] = useState(false);
