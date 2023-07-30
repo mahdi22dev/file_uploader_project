@@ -4,14 +4,6 @@ import styled from "../../app/contact/contact.module.css";
 import Sent from "./Sent";
 import { useRouter } from "next/navigation";
 const Form = () => {
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-      )
-      .join("&");
-  };
-
   const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -31,13 +23,7 @@ const Form = () => {
       email: "",
       message: "",
     });
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ contact: "contact", ...formData }),
-    })
-      .then(() => alert("Success!"))
-      .catch((error) => alert(error));
+
     setSent(true);
   };
   useEffect(() => {
@@ -55,58 +41,59 @@ const Form = () => {
   }, [sent]);
 
   return (
-    <form
-      name='contact'
-      method='POST'
-      data-netlify='true'
-      onSubmit={handleSubmit}
-    >
-      <input value='contact' name='form-name' type='hidden' />
-      <div className={styled.form_control}>
-        <label className={styled.label} htmlFor='name'>
-          Name:
-        </label>
-        <input
-          className={styled.input}
-          type='text'
-          id='name'
-          name='name'
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className={styled.form_control}>
-        <label className={styled.label} htmlFor='email'>
-          Email:
-        </label>
-        <input
-          className={styled.input}
-          type='email'
-          id='email'
-          name='email'
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div lassName={styled.form_control}>
-        <label className={styled.label} htmlFor='message'>
-          Message:
-        </label>
-        <textarea
-          className={styled.textarea}
-          id='message'
-          name='message'
-          value={formData.message}
-          onChange={handleChange}
-          rows={10}
-          required
-        />
-      </div>
-      <button className={styled.button}>
-        <span>Contact</span>
-      </button>
+    <form name='contact' onSubmit={handleSubmit} netlify>
+      <input type='hiddden' id='contact' name='contact' value={"contact"} />
+      {sent ? (
+        <Sent />
+      ) : (
+        <>
+          <div className={styled.form_control}>
+            <label className={styled.label} htmlFor='name'>
+              Name:
+            </label>
+            <input
+              className={styled.input}
+              type='text'
+              id='name'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styled.form_control}>
+            <label className={styled.label} htmlFor='email'>
+              Email:
+            </label>
+            <input
+              className={styled.input}
+              type='email'
+              id='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div lassName={styled.form_control}>
+            <label className={styled.label} htmlFor='message'>
+              Message:
+            </label>
+            <textarea
+              className={styled.textarea}
+              id='message'
+              name='message'
+              value={formData.message}
+              onChange={handleChange}
+              rows={10}
+              required
+            />
+          </div>
+          <button className={styled.button}>
+            <span>Contact</span>
+          </button>
+        </>
+      )}
     </form>
   );
 };
