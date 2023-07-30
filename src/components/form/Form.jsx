@@ -41,58 +41,52 @@ const Form = () => {
   }, [sent]);
 
   return (
-    <form onSubmit={handleSubmit} netlify>
-      {sent ? (
-        <Sent />
-      ) : (
-        <>
-          <div className={styled.form_control}>
-            <label className={styled.label} htmlFor='name'>
-              Name:
-            </label>
-            <input
-              className={styled.input}
-              type='text'
-              id='name'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className={styled.form_control}>
-            <label className={styled.label} htmlFor='email'>
-              Email:
-            </label>
-            <input
-              className={styled.input}
-              type='email'
-              id='email'
-              name='email'
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div lassName={styled.form_control}>
-            <label className={styled.label} htmlFor='message'>
-              Message:
-            </label>
-            <textarea
-              className={styled.textarea}
-              id='message'
-              name='message'
-              value={formData.message}
-              onChange={handleChange}
-              rows={10}
-              required
-            />
-          </div>
-          <button className={styled.button}>
-            <span>Contact</span>
-          </button>
-        </>
-      )}
+    <form name='contact' data-netlify='true' onSubmit={handleSubmit}>
+      <div className={styled.form_control}>
+        <label className={styled.label} htmlFor='name'>
+          Name:
+        </label>
+        <input
+          className={styled.input}
+          type='text'
+          id='name'
+          name='name'
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className={styled.form_control}>
+        <label className={styled.label} htmlFor='email'>
+          Email:
+        </label>
+        <input
+          className={styled.input}
+          type='email'
+          id='email'
+          name='email'
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div lassName={styled.form_control}>
+        <label className={styled.label} htmlFor='message'>
+          Message:
+        </label>
+        <textarea
+          className={styled.textarea}
+          id='message'
+          name='message'
+          value={formData.message}
+          onChange={handleChange}
+          rows={10}
+          required
+        />
+      </div>
+      <button className={styled.button}>
+        <span>Contact</span>
+      </button>
     </form>
   );
 };
