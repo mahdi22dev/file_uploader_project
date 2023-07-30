@@ -4,6 +4,14 @@ import styled from "../../app/contact/contact.module.css";
 import Sent from "./Sent";
 import { useRouter } from "next/navigation";
 const Form = () => {
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+  };
+
   const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -23,7 +31,13 @@ const Form = () => {
       email: "",
       message: "",
     });
-
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ contact: "contact", ...formData }),
+    })
+      .then(() => alert("Success!"))
+      .catch((error) => alert(error));
     setSent(true);
   };
   useEffect(() => {
