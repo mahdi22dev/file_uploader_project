@@ -29,7 +29,6 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { done: false, test: "faild to upload file" },
       { status: 401 }

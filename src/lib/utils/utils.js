@@ -100,7 +100,6 @@ export const FetchPaginationPosts = async (skip, id, limit) => {
   let FeaturedPosts;
   try {
     if (id == 1) {
-      console.log(skip);
       FeaturedPosts = await client.getEntries({
         content_type: "nextBlog",
         limit: limit,

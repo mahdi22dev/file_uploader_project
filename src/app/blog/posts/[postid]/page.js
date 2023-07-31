@@ -32,7 +32,6 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const slug = params.postid;
   const post = await FetchOnePost(slug);
-  console.log(post.items[0].fields.content);
 
   const cover = `https://${post.items[0].fields.image.fields.file.url}`;
   const alt = post.items[0].fields.image.fields.file.title;

@@ -35,7 +35,6 @@ const UploadFile = ({ req }) => {
       } catch (error) {
         setLoading(false);
         setError(true);
-        console.log(error);
       }
     }
     if (!fileContext) {

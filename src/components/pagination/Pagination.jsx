@@ -39,7 +39,7 @@ export default async function Pagination({ pageN }) {
                 ? `${styled.pagination_btns} ${styled.active_btn}`
                 : styled.pagination_btns
             }
-            href={`./blog/${page.pageid}`}
+            href={`/blog/${page.pageid}`}
           >
             {page.pageid}
           </Link>
