@@ -5,10 +5,10 @@ import { FetchAllPosts } from "@/lib/utils/utils";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default async function Pagination({ pageN }) {
-  const data = await FetchAllPosts();
+export default async function Pagination({ pageN, total }) {
+  console.log(total);
   const itemsPerPage = 6;
-  const pages = Math.ceil(data.items.length / itemsPerPage);
+  const pages = Math.ceil(total / itemsPerPage);
   const NewData = Array.from({ length: pages }, (_, idnex) => {
     const myindex = idnex + 1;
     return { pageid: myindex.toString() };

@@ -25,6 +25,7 @@ export default async function Page({ params }) {
   let limit = 6;
 
   const data = await FetchPaginationPosts(skip, id, limit);
+  console.log(data.total);
   if (!data || !params.pageid) {
     return notFound();
   }
@@ -37,7 +38,7 @@ export default async function Page({ params }) {
             return <PostCard key={post.fields.slug} post={post} />;
           })}
         </div>
-        <Pagination pageN={params.pageid} />
+        <Pagination total={data.total} pageN={params.pageid} />
       </main>
     </>
   );
