@@ -20,7 +20,6 @@ export async function POST(request) {
     });
 
     const info = await res.json();
-    console.log(info);
     const { id, name } = info?.data?.file?.metadata;
     const metadata = info?.data?.file?.metadata;
     await adddata(id, name);

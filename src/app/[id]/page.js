@@ -3,6 +3,7 @@ import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import { notFound } from "next/navigation";
 import { FetchdownloadURL } from "@/lib/utils/puppeteer";
+import { fetchWebsite } from "@/lib/utils/cheerio";
 
 export async function generateStaticParams({ params }) {
   const response = await fetch(
@@ -34,7 +35,9 @@ export default async function Page({ params }) {
   const { full } = await data?.data?.file.url;
   const { name, size } = await data?.data?.file?.metadata;
 
-  const downloadURL = await FetchdownloadURL(full);
+  // const downloadURL = await FetchdownloadURL(full);
+  const downloadURL = await fetchWebsite(full);
+  console.log("url: " + downloadURL);
 
   return (
     <>

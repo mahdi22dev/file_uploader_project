@@ -37,7 +37,6 @@ export default async function Page({ params }) {
             return <PostCard key={post.fields.slug} post={post} />;
           })}
         </div>
-        {/* pagination component */}
         <Pagination pageN={params.pageid} />
       </main>
     </>

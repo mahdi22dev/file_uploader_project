@@ -1,17 +1,40 @@
-const url = "https://anonfiles.com/W6g3yc57z4/error_txt";
-async function fetchWebsite(url) {
+const cheerio = require("cheerio");
+
+export const fetchWebsite = async (url) => {
+  let downloadLink = "";
   try {
     const response = await fetch(url);
-
-    if (!response.data) {
-      console.error("Error fetching the website:", error);
-    }
-    const $ = cheerio.load(response.data);
-    const xpath = '//*[@id="download-url"]';
-    const link = $(xpath).attr("href");
-    return link;
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    const links = $("a");
+    links.each((index, value) => {
+      if ($(value).attr("href").includes("cdn")) {
+        console.log("download link found :" + $(value).attr("href"));
+        downloadLink = $(value).attr("href");
+        console.log(downloadLink);
+      }
+    });
+    return downloadLink;
   } catch (error) {
     console.error("Error fetching the website:", error);
     return null;
   }
-}
+
+  // fetch(url)
+  //   .then(function (response) {
+  //     return response.text();
+  //   })
+  //   .then(function (html) {
+  //     const $ = cheerio.load(html);
+  //     const links = $("a");
+  //     links.each((index, value) => {
+  //       if ($(value).attr("href").includes("cdn")) {
+  //         console.log("download link found :" + $(value).attr("href"));
+  //         downloadLink = $(value).attr("href");
+  //       }
+  //     });
+  //   })
+  //   .catch(function (err) {
+  //     console.log("Failed to fetch page: ", err);
+  //   });
+};
