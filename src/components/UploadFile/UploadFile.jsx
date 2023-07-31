@@ -12,8 +12,6 @@ const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
-  const [currentUrl, setCurrentUrl] = useState("");
-  useEffect(() => {}, []);
 
   const handleUpload = async () => {
     if (fileContext) {
@@ -29,7 +27,7 @@ const UploadFile = ({ req }) => {
         const data = await res.json();
         setLoading(false);
         const { id, name } = data?.results?.metadata;
-        let link = `${currentUrl}/${id}`;
+        let link = `https:/${window.location.hostname}/${id}`;
         const linkObj = { id, link, name };
         setLinks([...links, linkObj]);
       } catch (error) {
