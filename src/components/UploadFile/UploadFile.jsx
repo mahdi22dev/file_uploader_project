@@ -27,7 +27,7 @@ const UploadFile = ({ req }) => {
         const data = await res.json();
         setLoading(false);
         const { id, name } = data?.results?.metadata;
-        let link = `https:/${window.location.hostname}/${id}`;
+        let link = `https:/${"file-uploader-project.vercel.app/"}/${id}`;
         const linkObj = { id, link, name };
         setLinks([...links, linkObj]);
       } catch (error) {
