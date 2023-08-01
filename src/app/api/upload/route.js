@@ -13,6 +13,7 @@ const adddata = async (id, name) => {
 
 export async function POST(request) {
   let formData = await request.formData();
+  // add cloudinary
   try {
     const res = await fetch("https://api.anonfiles.com/upload", {
       method: "POST",
