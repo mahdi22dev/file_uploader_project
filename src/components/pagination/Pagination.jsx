@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default async function Pagination({ pageN, total }) {
-  console.log(total);
   const itemsPerPage = 6;
   const pages = Math.ceil(total / itemsPerPage);
   const NewData = Array.from({ length: pages }, (_, idnex) => {
