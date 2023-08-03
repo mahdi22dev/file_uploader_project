@@ -6,7 +6,7 @@ import { fetchWebsite } from "@/lib/utils/cheerio";
 
 export async function generateStaticParams({ params }) {
   const response = await fetch(
-    "https://file-uploader-a0f03-default-rtdb.firebaseio.com/__collections__.json",
+    "https://file-uploader-a0f03-default-rtdb.firebaseio.com/newdata/__collections__.json",
     { cache: "force-cache" }
   );
   const data = await response.json();
