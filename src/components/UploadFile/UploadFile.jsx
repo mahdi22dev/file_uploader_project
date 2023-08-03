@@ -7,6 +7,7 @@ import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
+import CustomError from "../CustomError/CustomError";
 
 const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();
@@ -33,6 +34,7 @@ const UploadFile = ({ req }) => {
       } catch (error) {
         setLoading(false);
         setError(true);
+        throw new Error("upload failed");
       }
     }
     if (!fileContext) {
@@ -40,8 +42,7 @@ const UploadFile = ({ req }) => {
     }
   };
   if (Error) {
-    // try again button
-    return <div>Error</div>;
+    return <CustomError />;
   }
 
   return (

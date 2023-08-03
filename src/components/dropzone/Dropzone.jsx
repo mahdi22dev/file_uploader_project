@@ -71,9 +71,15 @@ export default function MyDropzone() {
         ) : (
           <p>Drag drop some files here, or click to select files</p>
         )}
-        {rejected.length > 0 && (
-          <p style={{ color: "red" }}>{rejected[0].errors[0].message}</p>
-        )}
+        {
+          rejected.length > 0 &&
+            (rejected[0].errors[0].message.includes("larger") ? (
+              <p style={{ color: "red" }}>File is larger than 1gb</p>
+            ) : (
+              <p style={{ color: "red" }}>{rejected[0].errors[0].message}</p>
+            ))
+          // <p style={{ color: "red" }}>{rejected[0].errors[0].message}</p>
+        }
       </div>
     </>
   );
