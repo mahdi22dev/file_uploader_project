@@ -1,4 +1,4 @@
-import { getInfo, postFile } from "@/lib/utils/data";
+import { getInfo, postFile } from "@/constans/constans";
 import Highlighter from "./SyntaxHighlighter/Highlighter";
 import styled from "./page.module.css";
 

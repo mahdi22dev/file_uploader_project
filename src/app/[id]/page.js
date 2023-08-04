@@ -2,7 +2,7 @@ import React from "react";
 import styled from "./page.module.css";
 import { SlCloudDownload } from "react-icons/sl";
 import { notFound } from "next/navigation";
-import { fetchWebsite } from "@/lib/utils/cheerio";
+import { fetchWebsite } from "@/lib/cheerio";
 
 export async function generateStaticParams({ params }) {
   const response = await fetch(
