@@ -23,9 +23,7 @@ export default async function Page({ params }) {
   const itemsPerPage = 6;
   let skip = itemsPerPage * id - 6;
   let limit = 6;
-
   const data = await FetchPaginationPosts(skip, id, limit);
-  console.log(data.total);
   if (!data || !params.pageid) {
     return notFound();
   }

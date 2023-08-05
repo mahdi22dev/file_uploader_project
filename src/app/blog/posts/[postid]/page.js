@@ -39,12 +39,20 @@ export default async function Page({ params }) {
   const options = {
     renderMark: {
       [MARKS.BOLD]: (text) => <span className={styled.span}>{text}</span>,
-      [MARKS.CODE]: (text) => console.log(text),
+      [MARKS.CODE]: (text) => <HighLight>{text}</HighLight>,
     },
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => (
         <p className={styled.paragraph}>{children}</p>
       ),
+      [BLOCKS.PARAGRAPH]: (node, children) => (
+        <p className={styled.paragraph}>{children}</p>
+      ),
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const { file } = node.data.target.fields;
+        const url = `https://${file.url}`;
+        return <Image alt='image' src={url} width={500} height={400}></Image>;
+      },
     },
   };
 
@@ -56,7 +64,6 @@ export default async function Page({ params }) {
           <div className={styled.cover}>
             <Image fill src={cover} alt={alt} />
           </div>
-          <div>profile info</div>
           {post.items.map((item) => {
             return documentToReactComponents(item.fields.content, options);
           })}

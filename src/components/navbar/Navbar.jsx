@@ -4,7 +4,7 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import Link from "next/link";
 import styled from "./navbar.module.css";
 import { SlMenu, SlClose } from "react-icons/sl";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { navbarVariants } from "@/variants/variants";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import Image from "next/image";
