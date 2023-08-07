@@ -6,6 +6,7 @@ import Image from "next/image";
 import HighLight from "@/components/blog/post/HighLight";
 import { client } from "@/lib/contentful";
 import { FetchAllPosts } from "@/lib/utils/utils";
+import ImageLoader from "@/components/ImageLoader/ImageLoader";
 
 export const dynamicParams = true;
 export const FetchOnePost = async (slug) => {

@@ -50,7 +50,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-
   margin-bottom: 20px;
   padding-bottom: 40px;
   padding-top: 10px;
@@ -95,9 +94,6 @@
     margin-left: 70px;
     align-items: center;
     justify-content: center;
-  }
-  .nav_links a:nth-child(1) {
-    /* font-size: clamp(35px, 5vw, 60px); */
   }
   .nav_links a:hover {
     color: var(--color-primary-a10);
