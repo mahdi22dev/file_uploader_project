@@ -15,32 +15,27 @@ const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
-  // Create a child reference
-  const storageRef = ref(storage, "files");
-  console.log(storageRef);
-
   const handleUpload = async () => {
     if (fileContext) {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
-      console.log("");
-
+      console.log(fileContext[0]);
+      const storageRef = ref(storage, fileContext[0].name);
       try {
         // const res = await fetch("/api/upload", {
         //   method: "POST",
         //   body: formData,
         // });
         // const data = await res.json();
-        // setLoading(false);
         // const { id, name } = data?.results?.metadata;
         // let link = `https:/${"file-uploader-project.vercel.app/"}/${id}`;
         // const linkObj = { id, link, name };
-
-        uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
+        // setLinks([...links, linkObj]);
+        await uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
           console.log("Uploaded a blob or file!");
         });
-        setLinks([...links, linkObj]);
+        setLoading(false);
       } catch (error) {
         setLoading(false);
         setError(true);
