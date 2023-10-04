@@ -10,6 +10,7 @@ import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
+import { nanoid } from "nanoid";
 
 const UploadFile = ({ req }) => {
   const { fileContext, setLoading, setFileContext } = useGlobalContext();
@@ -21,15 +22,14 @@ const UploadFile = ({ req }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
-      const storageRef = ref(storage, fileContext[0].name);
+
       try {
+        const filename = fileContext[0].name + "_" + nanoid();
+        const storageRef = ref(storage, filename);
         await uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
           notifySuccesUpload();
           setFileContext([]);
         });
-
-        const url = await getDownloadURL(ref(storageRef));
-        console.log(url);
 
         setLoading(false);
       } catch (error) {

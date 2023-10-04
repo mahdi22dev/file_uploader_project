@@ -7,9 +7,12 @@
 }
 .not_found {
   min-height: 80vh;
+  width: 100%;
+  display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 .button {
   position: relative;
