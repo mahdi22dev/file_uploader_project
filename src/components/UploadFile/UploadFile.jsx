@@ -8,28 +8,38 @@ import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "@/lib/firebase";
 
 const UploadFile = ({ req }) => {
   const { fileContext, setLoading } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
+  // Create a child reference
+  const storageRef = ref(storage, "files");
+  console.log(storageRef);
 
   const handleUpload = async () => {
     if (fileContext) {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
+      console.log("");
 
       try {
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
+        // const res = await fetch("/api/upload", {
+        //   method: "POST",
+        //   body: formData,
+        // });
+        // const data = await res.json();
+        // setLoading(false);
+        // const { id, name } = data?.results?.metadata;
+        // let link = `https:/${"file-uploader-project.vercel.app/"}/${id}`;
+        // const linkObj = { id, link, name };
+
+        uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
+          console.log("Uploaded a blob or file!");
         });
-        const data = await res.json();
-        setLoading(false);
-        const { id, name } = data?.results?.metadata;
-        let link = `https:/${"file-uploader-project.vercel.app/"}/${id}`;
-        const linkObj = { id, link, name };
         setLinks([...links, linkObj]);
       } catch (error) {
         setLoading(false);
