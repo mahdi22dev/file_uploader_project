@@ -38,6 +38,22 @@ export const notifyClipBoard = () =>
       color: "#fff",
     },
   });
+export const notifySuccesUpload = () =>
+  toast.success("File Uploaded successfully", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: "dark",
+    bodyStyle: { color: " var(--color-primary-a10" },
+    progressStyle: { backgroundColor: " var(--color-primary-a10)" },
+    style: {
+      color: "#fff",
+    },
+  });
 export const codeCopy = () =>
   toast.success("code copied", {
     position: "top-center",

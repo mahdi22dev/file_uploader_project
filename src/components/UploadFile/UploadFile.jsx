@@ -5,36 +5,32 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
-import { bytesToSize, notify } from "@/lib/utils/utils";
+import { bytesToSize, notify, notifySuccesUpload } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 
 const UploadFile = ({ req }) => {
-  const { fileContext, setLoading } = useGlobalContext();
+  const { fileContext, setLoading, setFileContext } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
+
   const handleUpload = async () => {
     if (fileContext) {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
-      console.log(fileContext[0]);
       const storageRef = ref(storage, fileContext[0].name);
       try {
-        // const res = await fetch("/api/upload", {
-        //   method: "POST",
-        //   body: formData,
-        // });
-        // const data = await res.json();
-        // const { id, name } = data?.results?.metadata;
-        // let link = `https:/${"file-uploader-project.vercel.app/"}/${id}`;
-        // const linkObj = { id, link, name };
-        // setLinks([...links, linkObj]);
         await uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
-          console.log("Uploaded a blob or file!");
+          notifySuccesUpload();
+          setFileContext([]);
         });
+
+        const url = await getDownloadURL(ref(storageRef));
+        console.log(url);
+
         setLoading(false);
       } catch (error) {
         setLoading(false);
