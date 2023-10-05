@@ -41,7 +41,7 @@ const UploadFile = ({ req }) => {
             setFileContext([]);
           }
         );
-        let link = `http://localhost:3000/${filename}`;
+        let link = `https://file-uploader-project.vercel.app/${filename}`;
         const linkObj = { id, link, name: fileContext[0].name };
         setLinks([...links, linkObj]);
         setLoading(false);
