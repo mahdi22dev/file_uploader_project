@@ -45,6 +45,9 @@
 .links p {
   margin-bottom: 0;
 }
+.links p:hover {
+  opacity: 80%;
+}
 .links svg {
   color: var(--color-primary-a10);
   cursor: pointer;
