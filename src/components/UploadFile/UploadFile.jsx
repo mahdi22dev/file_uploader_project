@@ -29,7 +29,7 @@ const UploadFile = ({ req }) => {
       formData.append("file", fileContext[0]);
       const id = nanoid();
       try {
-        const filename = decodeURIComponent(fileContext[0].name);
+        const filename = encodeURIComponent(fileContext[0].name);
         console.log(filename);
         const path = `/${id}/${filename}`;
         const filesize = formatFileSize(fileContext[0].size);
