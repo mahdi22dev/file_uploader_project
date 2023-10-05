@@ -4,6 +4,7 @@ import { SlCloudDownload } from "react-icons/sl";
 import { storage } from "@/lib/firebase";
 import { getDownloadURL, getMetadata, ref } from "firebase/storage";
 import NotFound from "./not-found";
+import DButton from "@/components/download_Button/DButton";
 
 export default async function Page({ params }) {
   const fileid = params.id;
@@ -27,7 +28,13 @@ export default async function Page({ params }) {
       >
         <h2>File Name: {fileInfo.name}</h2>
         <h2>file size: {fileInfo?.size}</h2>
-        <a
+
+        <DButton
+          classsname={styled.button}
+          downloadURL={downloadURL}
+          name={fileInfo.name}
+        />
+        {/* <a
           className={styled.button}
           href={downloadURL}
           download={"songmp3.mp3_u_srgBNYxwHhFZ3be5LY1"}
@@ -36,7 +43,7 @@ export default async function Page({ params }) {
             <SlCloudDownload />
             Download
           </span>
-        </a>
+        </a> */}
       </main>
     </>
   );

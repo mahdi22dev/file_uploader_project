@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react";
 import styles from "./context.module.css";
 import { usePathname } from "next/navigation";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 const GlobalContext = React.createContext();
 const ContextProvidor = ({ children }) => {
@@ -34,14 +35,17 @@ const ContextProvidor = ({ children }) => {
           themeToggle === "dark" ? styles.dark : styles.white
         }`}
       >
+        <ProgressBar
+          height='4px'
+          color='#fffd00'
+          options={{ showSpinner: false }}
+          shallowRouting
+        />
         {children}
       </main>
     </GlobalContext.Provider>
   );
 };
-
-// make sure use the global context for less code
-
 export const useGlobalContext = () => {
   return useContext(GlobalContext);
 };
