@@ -9,19 +9,14 @@ export default async function Page({ params }) {
   const filename = params.id;
   const storageRef = ref(storage, filename);
   const downloadURL = await getDownloadURL(storageRef);
-  // const fileref = ref(storage, "/");
   const metadata = await getMetadata(storageRef);
-  console.log(metadata);
-
   const fileInfo = {
     name: metadata.customMetadata.name,
-    size: "will be added with meta data",
+    size: metadata.customMetadata.size,
   };
   if (!downloadURL) {
     return NotFound();
   }
-
-  console.log(downloadURL);
   return (
     <>
       <main

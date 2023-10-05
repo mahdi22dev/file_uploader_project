@@ -5,7 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
-import { bytesToSize, notify, notifySuccesUpload } from "@/lib/utils/utils";
+import {
+  bytesToSize,
+  formatFileSize,
+  notify,
+  notifySuccesUpload,
+} from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
 import { ref, uploadBytes, updateMetadata } from "firebase/storage";
@@ -22,11 +27,13 @@ const UploadFile = ({ req }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
-
+      const id = nanoid();
       try {
-        const filename = fileContext[0].name + "_" + nanoid();
-
-        const metadata = { customMetadata: { name: fileContext[0].name } };
+        const filename = fileContext[0].name + "_" + id;
+        const filesize = formatFileSize(fileContext[0].size);
+        const metadata = {
+          customMetadata: { name: fileContext[0].name, size: filesize },
+        };
         const storageRef = ref(storage, filename);
         await uploadBytes(storageRef, fileContext[0], metadata).then(
           (snapshot) => {
@@ -34,7 +41,9 @@ const UploadFile = ({ req }) => {
             setFileContext([]);
           }
         );
-
+        let link = `http://localhost:3000/${filename}`;
+        const linkObj = { id, link, name: fileContext[0].name };
+        setLinks([...links, linkObj]);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -46,6 +55,7 @@ const UploadFile = ({ req }) => {
       notify();
     }
   };
+
   if (Error) {
     return <CustomError />;
   }
@@ -85,7 +95,7 @@ const UploadFile = ({ req }) => {
       </button>
 
       {links?.map((link) => {
-        return <Links key={link.id} className={styled.links} link={link} />;
+        return <Links key={link.name} className={styled.links} link={link} />;
       })}
     </form>
   );
