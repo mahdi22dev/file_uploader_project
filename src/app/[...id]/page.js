@@ -6,7 +6,9 @@ import { getDownloadURL, getMetadata, ref } from "firebase/storage";
 import NotFound from "./not-found";
 
 export default async function Page({ params }) {
-  const filename = params.id;
+  const fileid = params.id;
+  const filename = `${fileid[0]}/${fileid[1]}`;
+  console.log(filename);
   const storageRef = ref(storage, filename);
   const downloadURL = await getDownloadURL(storageRef);
   const metadata = await getMetadata(storageRef);

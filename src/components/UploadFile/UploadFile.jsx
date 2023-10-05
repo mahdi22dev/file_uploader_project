@@ -29,19 +29,21 @@ const UploadFile = ({ req }) => {
       formData.append("file", fileContext[0]);
       const id = nanoid();
       try {
-        const filename = fileContext[0].name + "_" + id;
+        const filename = decodeURIComponent(fileContext[0].name);
+        console.log(filename);
+        const path = `/${id}/${filename}`;
         const filesize = formatFileSize(fileContext[0].size);
         const metadata = {
           customMetadata: { name: fileContext[0].name, size: filesize },
         };
-        const storageRef = ref(storage, filename);
+        const storageRef = ref(storage, path);
         await uploadBytes(storageRef, fileContext[0], metadata).then(
           (snapshot) => {
             notifySuccesUpload();
             setFileContext([]);
           }
         );
-        let link = `https://file-uploader-project.vercel.app/${filename}`;
+        let link = `https://file-uploader-project.vercel.app/${id}/${filename}`;
         const linkObj = { id, link, name: fileContext[0].name };
         setLinks([...links, linkObj]);
         setLoading(false);
