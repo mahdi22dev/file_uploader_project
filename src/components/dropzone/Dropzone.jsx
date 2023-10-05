@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "./dropzone.module.css";
 import { useGlobalContext } from "@/context/themecontext/ThemeContext";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 // to utils
 
@@ -38,11 +39,18 @@ export default function MyDropzone({ uploadProgress }) {
         aria-disabled={loading}
         style={{ backgroundColor: isDragActive && " var(--color-primary-a60)" }}
       >
+        {" "}
         {loading ? (
           <>
-            {/* <div className={styled.loader}></div> */}
-            <p>{uploadProgress}%</p>
             <p className={styled.loadertext}>Uploading The File Please Wait</p>
+            <ProgressBar
+              completed={uploadProgress}
+              maxCompleted={100}
+              width='300px'
+              height='40px'
+              bgColor='#fffd00'
+              labelColor={"#333"}
+            />
           </>
         ) : (
           <div className={styled.animation}>
@@ -77,7 +85,6 @@ export default function MyDropzone({ uploadProgress }) {
             )}
           </>
         )}
-
         {
           rejected.length > 0 &&
             (rejected[0].errors[0].message.includes("larger") ? (
