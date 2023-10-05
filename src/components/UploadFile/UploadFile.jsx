@@ -8,7 +8,7 @@ import { SlCloudUpload } from "react-icons/sl";
 import { bytesToSize, notify, notifySuccesUpload } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, updateMetadata } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { nanoid } from "nanoid";
 
@@ -25,17 +25,21 @@ const UploadFile = ({ req }) => {
 
       try {
         const filename = fileContext[0].name + "_" + nanoid();
+
+        const metadata = { customMetadata: { name: fileContext[0].name } };
         const storageRef = ref(storage, filename);
-        await uploadBytes(storageRef, fileContext[0]).then((snapshot) => {
-          notifySuccesUpload();
-          setFileContext([]);
-        });
+        await uploadBytes(storageRef, fileContext[0], metadata).then(
+          (snapshot) => {
+            notifySuccesUpload();
+            setFileContext([]);
+          }
+        );
 
         setLoading(false);
       } catch (error) {
         setLoading(false);
         setError(true);
-        throw new Error("upload failed");
+        throw new Error("upload failed", error);
       }
     }
     if (!fileContext) {
