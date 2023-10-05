@@ -8,7 +8,7 @@ import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 
 let rejected = [];
 
-export default function MyDropzone() {
+export default function MyDropzone({ uploadProgress }) {
   const { setFileContext, themeToggle, loading } = useGlobalContext();
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
@@ -35,12 +35,14 @@ export default function MyDropzone() {
     <>
       <div
         {...getRootProps({ className: classname })}
+        aria-disabled={loading}
         style={{ backgroundColor: isDragActive && " var(--color-primary-a60)" }}
       >
         {loading ? (
           <>
-            <div className={styled.loader}></div>
-            <p className={styled.loadertext}>uploading the file</p>
+            {/* <div className={styled.loader}></div> */}
+            <p>{uploadProgress}%</p>
+            <p className={styled.loadertext}>Uploading The File Please Wait</p>
           </>
         ) : (
           <div className={styled.animation}>
@@ -65,12 +67,17 @@ export default function MyDropzone() {
             </div>
           </div>
         )}
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>Drag drop some files here, or click to select files</p>
+        <input {...getInputProps()} disabled={loading} />
+        {loading ? null : (
+          <>
+            {isDragActive ? (
+              <p>Drop the files here ...</p>
+            ) : (
+              <p>Drag drop some files here, or click to select files</p>
+            )}
+          </>
         )}
+
         {
           rejected.length > 0 &&
             (rejected[0].errors[0].message.includes("larger") ? (

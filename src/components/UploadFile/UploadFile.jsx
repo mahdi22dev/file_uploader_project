@@ -13,7 +13,7 @@ import {
 } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
-import { ref, uploadBytes, updateMetadata } from "firebase/storage";
+import { ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "@/lib/firebase";
 import { nanoid } from "nanoid";
 
@@ -21,6 +21,8 @@ const UploadFile = ({ req }) => {
   const { fileContext, setLoading, setFileContext } = useGlobalContext();
   const [Error, setError] = useState(false);
   const [links, setLinks] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  console.log(uploadProgress);
 
   const handleUpload = async () => {
     if (fileContext) {
@@ -37,20 +39,34 @@ const UploadFile = ({ req }) => {
           customMetadata: { name: fileContext[0].name, size: filesize },
         };
         const storageRef = ref(storage, path);
-        await uploadBytes(storageRef, fileContext[0], metadata).then(
-          (snapshot) => {
-            notifySuccesUpload();
-            setFileContext([]);
-          }
+
+        const uploadTask = uploadBytesResumable(
+          storageRef,
+          fileContext[0],
+          metadata
         );
+
+        uploadTask.on("state_changed", (snapshot) => {
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          setUploadProgress(progress);
+        });
+
+        await uploadTask;
+
         let link = `https://file-uploader-project.vercel.app/${id}/${filename}`;
         const linkObj = { id, link, name: fileContext[0].name };
         setLinks([...links, linkObj]);
         setLoading(false);
+        notifySuccesUpload();
+        setUploadProgress("");
+        setFileContext([]);
       } catch (error) {
         setLoading(false);
         setError(true);
-        throw new Error("upload failed", error);
+        console.log(error);
+        throw new Error(error);
       }
     }
     if (!fileContext) {
@@ -73,7 +89,7 @@ const UploadFile = ({ req }) => {
         (1 file is the maximum number of files you can drop here and 1gb max
         size)
       </p>
-      <MyDropzone />
+      <MyDropzone uploadProgress={uploadProgress} />
       {/* selected file display */}
       <div className={styled.display}>
         {fileContext?.map((file) => {
