@@ -159,3 +159,15 @@ export function formatFileSize(bytes) {
     return (bytes / (1024 * 1024)).toFixed(2) + " MB";
   }
 }
+
+export const baseUrl = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+
+  // Define your production and development base URLs
+  const productionUrl =
+    process.env.VERCEL_URL || "https://file-uploader-project.vercel.app";
+  const developmentUrl = "http://localhost:3000"; // Change this to your local development URL
+
+  // Return the appropriate base URL based on the environment
+  return isProduction ? productionUrl : developmentUrl;
+};

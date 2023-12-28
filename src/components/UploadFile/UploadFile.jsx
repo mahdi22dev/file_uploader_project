@@ -6,6 +6,7 @@ import { useGlobalContext } from "@/context/themecontext/ThemeContext";
 import styled from "./uploadfile.module.css";
 import { SlCloudUpload } from "react-icons/sl";
 import {
+  baseUrl,
   bytesToSize,
   formatFileSize,
   notify,
@@ -13,8 +14,7 @@ import {
 } from "@/lib/utils/utils";
 import Links from "@/components/links/Links";
 import CustomError from "../CustomError/CustomError";
-import { ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "@/lib/firebase";
+
 import { nanoid } from "nanoid";
 
 const UploadFile = ({ req }) => {
@@ -29,47 +29,63 @@ const UploadFile = ({ req }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", fileContext[0]);
-
       const id = nanoid();
+
+      // Create an XMLHttpRequest object
+      const xhr = new XMLHttpRequest();
+
+      // Track upload progress
+      xhr.upload.addEventListener("progress", (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = (event.loaded / event.total) * 100;
+          console.log(`Upload progress: ${percentComplete.toFixed(2)}%`);
+          // Update your progress state or UI as needed
+          setUploadProgress(percentComplete.toFixed(2));
+        }
+      });
+
       try {
         const filename = encodeURIComponent(fileContext[0].name);
-        console.log(filename);
-        const path = `/${id}/${filename}`;
-        const filesize = formatFileSize(fileContext[0].size);
-        const metadata = {
-          customMetadata: { name: fileContext[0].name, size: filesize },
-        };
-        const storageRef = ref(storage, path);
 
-        const uploadTask = uploadBytesResumable(
-          storageRef,
-          fileContext[0],
-          metadata
+        // Open the XMLHttpRequest with the POST method
+        xhr.open(
+          "POST",
+          process.env.NEXT_PUBLIC_BACKEND_SERVER + "/upload",
+          true
         );
 
-        uploadTask.on("state_changed", (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          setUploadProgress(progress);
-        });
+        // Send the FormData with the file
+        xhr.send(formData);
 
-        await uploadTask;
-
-        let link = `https://file-uploader-project.vercel.app/${id}/${filename}`;
-        const linkObj = { id, link, name: fileContext[0].name };
-        setLinks([...links, linkObj]);
-        setLoading(false);
-        notifySuccesUpload();
-        setUploadProgress("");
-        setFileContext([]);
+        // Listen for the XMLHttpRequest's state change
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              console.log(response);
+              if (response.success) {
+                let link = `${baseUrl()}/${response.fileName}`;
+                const linkObj = { id, link, name: fileContext[0].name };
+                setLinks([...links, linkObj]);
+                setLoading(false);
+                notifySuccesUpload();
+                setUploadProgress("");
+                setFileContext([]);
+              }
+            } else {
+              console.error("Upload failed:", xhr.statusText);
+              setLoading(false);
+              setError(true);
+            }
+          }
+        };
       } catch (error) {
+        console.log(error);
         setLoading(false);
         setError(true);
-        console.log(error);
-        throw new Error(error);
       }
     }
+
     if (!fileContext) {
       notify();
     }

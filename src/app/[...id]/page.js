@@ -1,49 +1,49 @@
 import React from "react";
 import styled from "./page.module.css";
-import { SlCloudDownload } from "react-icons/sl";
-import { storage } from "@/lib/firebase";
-import { getDownloadURL, getMetadata, ref } from "firebase/storage";
-import NotFound from "./not-found";
 import DButton from "@/components/download_Button/DButton";
+import { notFound } from "next/navigation";
+import { formatFileSize } from "@/lib/utils/utils";
 
 export default async function Page({ params }) {
-  const fileid = params.id;
-  const filename = `${fileid[0]}/${fileid[1]}`;
-  const storageRef = ref(storage, filename);
-  const downloadURL = await getDownloadURL(storageRef);
-  const metadata = await getMetadata(storageRef);
-  const fileInfo = {
-    name: metadata.customMetadata.name,
-    size: metadata.customMetadata.size,
+  const fileid = decodeURIComponent(params.id);
+  console.log(fileid);
+  let metadata = { name: "", size: "" };
+  const downloadURL =
+    process.env.NEXT_PUBLIC_BACKEND_SERVER + "/get-file/" + fileid;
+  const fetchMetaData = async () => {
+    try {
+      const data = await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_SERVER + "/file-meta/" + fileid
+      );
+      const response = await data.json();
+      if (response.success) {
+        metadata = { ...response.fileMetadata };
+        console.log(metadata);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.log(error.message);
+      throw new Error(error);
+    }
   };
-  if (!downloadURL) {
-    return NotFound();
+
+  if (!(await fetchMetaData())) {
+    return notFound();
   }
+
   return (
     <>
-      <main
-        className={styled.container}
-        href={downloadURL}
-        download={"songmp3.mp3_u_srgBNYxwHhFZ3be5LY1"}
-      >
-        <h2>File Name: {fileInfo.name}</h2>
-        <h2>file size: {fileInfo?.size}</h2>
+      <main className={styled.container}>
+        <h2>File Name: {metadata?.name}</h2>
+        <h2>file size: {formatFileSize(metadata?.size)}</h2>
 
         <DButton
           classsname={styled.button}
           downloadURL={downloadURL}
-          name={fileInfo.name}
+          name={metadata?.name}
         />
-        {/* <a
-          className={styled.button}
-          href={downloadURL}
-          download={"songmp3.mp3_u_srgBNYxwHhFZ3be5LY1"}
-        >
-          <span>
-            <SlCloudDownload />
-            Download
-          </span>
-        </a> */}
       </main>
     </>
   );
