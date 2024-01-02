@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  file-upload-frontend:
+    build: .
+    environment:
+      NEXT_PUBLIC_BACKEND_SERVER:  #deploy https://github.com/mahdi22dev/s3-server or use docker-compose.yml file from https://github.com/mahdi22dev/s3-server/tree/main/api-local to run a backend server with s3 server runs localy 
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    restart: always

@@ -8,7 +8,6 @@ import { SlCloudUpload } from "react-icons/sl";
 import {
   baseUrl,
   bytesToSize,
-  formatFileSize,
   notify,
   notifySuccesUpload,
 } from "@/lib/utils/utils";
