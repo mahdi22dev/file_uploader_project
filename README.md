@@ -1,6 +1,6 @@
 # Uploadupia
 
-Anonymous file uploader where users can upload files and share them, i used a fake s3 server localy to manage files
+Anonymous file uploader where users can upload files and share them, I used a fake s3 server locally to manage files
 
 First, run the development server:
 
@@ -27,13 +27,13 @@ To run this project, you will need to add the following environment variables to
 the root folder contains docker-compose.yml to build and run next js app to start the build use:
 
 ```bash
-docker compose -f "docker-compose.yml" up -d --build
+docker-compose -f "docker-compose.yml" up -d --build
 ```
 
 ## backend_server
 
-i am using s3rver package to mock s3 server to run tests localy
-the backend repo https://github.com/mahdi22dev/s3-server have 2 folders api and api-local , because i don't have any lunix server i could't deploy docker compose to run live so i made seperate folder called api-local contains docker-compose that use aws-cli image and localstack image
+i am using s3rver package to mock s3 server to run tests locally
+the backend repo https://github.com/mahdi22dev/s3-server have 2 folders API and api-local because I don't have any linux server I couldn't deploy docker compose to run live so I made seperate folder called api-local, which contains docker-compose that use aws-cli image and localstack image
 
 ## 🔗 Links
 
